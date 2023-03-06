@@ -1,0 +1,4207 @@
+property iHitOffset
+global p4state, p4name, aTourneyWinner, iStateFrames, sStateFrames, p2maxheight, p1Active, p2Active, p3Active, p4Active, p4x, p3x, p3FACE, p4SpriteNum, theXTIMEFPS, theXTIMEFPSdefault, fnKeyScript, p1ytemp, theConnection, errorCode, theChan, sPlayer1Name, sPlayer2Name, sLastRawLine, iPingCount, bEndSuper, bTMyApp, p1SuperJumpCount, p1HealthOffset, p2HealthOffset, p1HyperBarOffset, p2HyperBarOffset, p1HelperOffset, p2HelperOffset, cipherIn, cipherOut, theCipher, p2SpriteNum, p1Special, p1SpecialColour, bFinish, bReset, bInRound, p1HelperState, p1HelperCount, p2HelperState, p2HelperCount, p2Name, p2state, bMute, iMaxTracks, iLastTrack, iTheTrack, p1Rank, iVolume, p1Wins, p2Wins, bGo, fnSound, theSound, p2insuper, theScript, bfirsttime, InduceSeizure, iYBuffer, iYTemp, iFPS, iAFPS, iFrame, RyuFrame, GSpriteNum, p1Real, p1laststate, p1networkstring, p1NetworkCount, p1state, p1frame, p1lastframe, p1name, p1x, p1y, p1g, p1g2, p1SpriteNum, p1combo, p1comboname, p1lastcombo1, p1lastcombo2, p1lastcombo3, p1jcount, p1movecount, p1jumpcount, p1airmovecount, p1maxheight, p1maxjspeed, p1maxwspeed, p1maxjwspeed, p1inmove, p1insuper, p1movekeydown, p1inair, p1airstate, p1jumpstate, p1airmovedone, p1fball, p1fballcount, p1fballspeed, p1fballRatio, p1fballyoffset, p1InEffect, p2inEffect, p3InEffect, p4inEffect, p1EffectCount, p1BallFace, p1FACE, p2FACE, bQP1Flip, p1moveface, p1ku, p1kd, p1KB, p1KF, p1p1, p1p2, p1p3, p1k1, p1k2, p1k3, p1pr, p1pl, p1pu, p1pd, p1c, sTemp, sdebug, idebug, p1MaxHit, p2MaxHit, p1HitBox, p1SkipNextHitFrame, p2HitBox, p2SkipNextHitFrame, p2x, p1Health, p2Health, p1BHit1, p1BHit2, p1BHit3, p1BHit4, p1BHit1count, p1BHit2count, p1BHit3count, p1BHit4count, p2PushX, p2PushY, p1QSwitch, p2QSwitch, p3QSwitch, p4QSwitch, p3state
+
+on fnHitEffects
+  if p1BHit1 <> point(0, 0) then
+    p1BHit1count = p1BHit1count + 1
+    if p1BHit1count = 1 then
+      sprite(p1SpriteNum + 6).member = "efc_pa"
+    else
+      if p1BHit1count = 2 then
+        sprite(p1SpriteNum + 6).member = "efc_pb"
+      else
+        if p1BHit1count = 3 then
+          sprite(p1SpriteNum + 6).member = "efc_pc"
+        else
+          if p1BHit1count = 4 then
+            sprite(p1SpriteNum + 6).member = "efc_pd"
+          else
+            if p1BHit1count = 5 then
+              sprite(p1SpriteNum + 6).member = "efc_pe"
+            else
+              if p1BHit1count = 6 then
+                p1BHit1count = 0
+                p1BHit1 = point(0, 0)
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    member(sprite(p1SpriteNum + 6).member).palette = 879 + random(2)
+    if p1BHit1 <> point(0, 0) then
+      sprite(p1SpriteNum + 6).loc = sprite(GSpriteNum).loc - p1BHit1
+      sprite(p1SpriteNum + 6).ink = 37
+      if p1FACE = "right" then
+        sprite(p1SpriteNum + 6).flipH = 0
+      else
+        if p1FACE = "leftt" then
+          sprite(p1SpriteNum + 6).flipH = 1
+        end if
+      end if
+      sprite(p1SpriteNum + 6).blend = 100
+    else
+      sprite(p1SpriteNum + 6).loc = point(-1000, 0)
+      sprite(p1SpriteNum + 6).ink = 36
+      sprite(p1SpriteNum + 6).flipH = 0
+      sprite(p1SpriteNum + 6).blend = 100
+    end if
+  end if
+  if p1BHit2 <> point(0, 0) then
+    p1BHit2count = p1BHit2count + 1
+    if p1BHit2count = 1 then
+      sprite(p1SpriteNum + 6).member = "efc_ha"
+    else
+      if p1BHit2count = 2 then
+        sprite(p1SpriteNum + 6).member = "efc_hb"
+      else
+        if p1BHit2count = 3 then
+          sprite(p1SpriteNum + 6).member = "efc_hc"
+        else
+          if p1BHit2count = 4 then
+            sprite(p1SpriteNum + 6).member = "efc_hd"
+          else
+            if p1BHit2count = 5 then
+              sprite(p1SpriteNum + 6).member = "efc_he"
+            else
+              if p1BHit2count = 6 then
+                p1BHit2count = 0
+                p1BHit2 = point(0, 0)
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    member(sprite(p1SpriteNum + 6).member).palette = 879 + random(2)
+    if p1BHit2 <> point(0, 0) then
+      sprite(p1SpriteNum + 6).loc = sprite(GSpriteNum).loc - p1BHit2
+      sprite(p1SpriteNum + 6).ink = 37
+      if p1FACE = "right" then
+        sprite(p1SpriteNum + 6).flipH = 0
+      else
+        if p1FACE = "leftt" then
+          sprite(p1SpriteNum + 6).flipH = 1
+        end if
+      end if
+      sprite(p1SpriteNum + 6).blend = 100
+    else
+      sprite(p1SpriteNum + 6).loc = point(-1000, 0)
+      sprite(p1SpriteNum + 6).ink = 36
+      sprite(p1SpriteNum + 6).flipH = 0
+      sprite(p1SpriteNum + 6).blend = 100
+    end if
+  end if
+  if p1BHit3 <> point(0, 0) then
+    p1BHit3count = p1BHit3count + 1
+    if p1BHit3count = 1 then
+      sprite(p1SpriteNum + 7).member = "efc_fa"
+    else
+      if p1BHit3count = 2 then
+        sprite(p1SpriteNum + 7).member = "efc_fb"
+      else
+        if p1BHit3count = 3 then
+          sprite(p1SpriteNum + 7).member = "efc_fc"
+        else
+          if p1BHit3count = 4 then
+            sprite(p1SpriteNum + 7).member = "efc_fd"
+          else
+            if p1BHit3count = 5 then
+              sprite(p1SpriteNum + 7).member = "efc_fe"
+            else
+              if p1BHit3count = 6 then
+                p1BHit3count = 0
+                p1BHit3 = point(0, 0)
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    member(sprite(p1SpriteNum + 7).member).palette = 880
+    if p1BHit3 <> point(0, 0) then
+      sprite(p1SpriteNum + 7).loc = sprite(GSpriteNum).loc - p1BHit3
+      sprite(p1SpriteNum + 7).ink = 37
+      if p1FACE = "right" then
+        sprite(p1SpriteNum + 7).flipH = 0
+      else
+        if p1FACE = "leftt" then
+          sprite(p1SpriteNum + 7).flipH = 1
+        end if
+      end if
+      sprite(p1SpriteNum + 7).blend = 100
+    else
+      sprite(p1SpriteNum + 7).loc = point(-1000, 0)
+      sprite(p1SpriteNum + 7).ink = 36
+      sprite(p1SpriteNum + 7).flipH = 0
+      sprite(p1SpriteNum + 7).blend = 100
+    end if
+  end if
+  if p1BHit4 <> point(0, 0) then
+    p1BHit4count = p1BHit4count + 1
+    if p1BHit4count = 1 then
+      if random(2) = 1 then
+        sprite(p1SpriteNum + 7).member = "efc_hf"
+      else
+        sprite(p1SpriteNum + 7).member = "efc_hg"
+      end if
+      sprite(p1SpriteNum + 7).member = "efc_hf"
+    else
+      if p1BHit4count = 2 then
+        sprite(p1SpriteNum + 7).member = "efc_hg"
+      else
+        if p1BHit4count = 3 then
+          p1BHit4count = 0
+          p1BHit4 = point(0, 0)
+        end if
+      end if
+    end if
+    member(sprite(p1SpriteNum + 7).member).palette = 879 + random(2)
+    if p1BHit4 <> point(0, 0) then
+      sprite(p1SpriteNum + 7).loc = sprite(GSpriteNum).loc - p1BHit4
+      sprite(p1SpriteNum + 7).ink = 36
+      if p1FACE = "right" then
+        sprite(p1SpriteNum + 7).flipH = 0
+      else
+        if p1FACE = "leftt" then
+          sprite(p1SpriteNum + 7).flipH = 1
+        end if
+      end if
+      sprite(p1SpriteNum + 7).blend = 80
+    else
+      sprite(p1SpriteNum + 7).loc = point(-1000, 0)
+      sprite(p1SpriteNum + 7).ink = 36
+      sprite(p1SpriteNum + 7).flipH = 0
+      sprite(p1SpriteNum + 7).blend = 100
+    end if
+  end if
+end
+
+on fnFBall
+  if p1fball = "ryub" then
+    p1fballcount = p1fballcount + 1
+    if p1fballcount = 1 then
+      p1BallFace = p1moveface
+      sprite(p1SpriteNum + 1).locV = p1y
+      p1fballyoffset = sprite(p1SpriteNum).locV - sprite(GSpriteNum).locV
+      sprite(p1SpriteNum + 1).member = "ryu_q4"
+      sprite(p1SpriteNum + 1).locZ = 150
+      if p1BallFace = "right" then
+        sprite(p1SpriteNum + 1).locH = p1x + 90 - p1fballspeed
+        sprite(p1SpriteNum + 1).flipH = 0
+      else
+        if p1BallFace = "leftt" then
+          sprite(p1SpriteNum + 1).locH = p1x - 90 - p1fballspeed
+          sprite(p1SpriteNum + 1).flipH = 1
+        end if
+      end if
+    else
+      if p1fballcount = 2 then
+        sprite(p1SpriteNum + 1).member = "ryu_q1"
+      else
+        if p1fballcount = 3 then
+          sprite(p1SpriteNum + 1).member = "ryu_q2"
+        else
+          if p1fballcount = 4 then
+            sprite(p1SpriteNum + 1).member = "ryu_q3"
+          else
+            if p1fballcount = 5 then
+              sprite(p1SpriteNum + 1).member = "ryu_q4"
+            else
+              if p1fballcount = 6 then
+                sprite(p1SpriteNum + 1).member = "ryu_q5"
+              else
+                if p1fballcount = 7 then
+                  sprite(p1SpriteNum + 1).member = "ryu_q6"
+                else
+                  if p1fballcount = 8 then
+                    sprite(p1SpriteNum + 1).member = "ryu_q7"
+                  else
+                    if p1fballcount >= 9 then
+                      sprite(p1SpriteNum + 1).member = "ryu_q8"
+                      p1fballcount = 1
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1BallFace = "right" then
+      sprite(p1SpriteNum + 1).locH = sprite(p1SpriteNum + 1).locH + p1fballspeed
+    else
+      if p1BallFace = "leftt" then
+        sprite(p1SpriteNum + 1).locH = sprite(p1SpriteNum + 1).locH - p1fballspeed
+      end if
+    end if
+    sprite(p1SpriteNum + 1).locV = sprite(GSpriteNum).locV + p1fballyoffset
+    if sprite(p1SpriteNum + 1).ink = 7 then
+      sprite(p1SpriteNum + 1).ink = 37
+    else
+      if sprite(p1SpriteNum + 1).ink = 37 then
+        sprite(p1SpriteNum + 1).ink = 33
+      else
+        sprite(p1SpriteNum + 1).ink = 7
+      end if
+    end if
+    if p1insuper = 0 then
+      if p1BallFace = "right" then
+        if sprite(p1SpriteNum + 1).locH >= 450 or sprite(p1SpriteNum + 1).locH <= -70 then
+          p1fball = EMPTY
+          p1BallFace = EMPTY
+          sprite(p1SpriteNum + 1).locH = -250
+          sprite(p1SpriteNum + 1).ink = 0
+          p1fballcount = 0
+        end if
+      else
+        if p1BallFace = "leftt" then
+          if sprite(p1SpriteNum + 1).locH >= 450 or sprite(p1SpriteNum + 1).locH <= -70 then
+            p1fball = EMPTY
+            p1BallFace = EMPTY
+            sprite(p1SpriteNum + 1).locH = -250
+            sprite(p1SpriteNum + 1).ink = 0
+            p1fballcount = 0
+          end if
+        end if
+      end if
+    end if
+  end if
+end
+
+on fnAction
+  fnHitEffects()
+  if p1lastframe = EMPTY then
+    p1lastframe = "ryu_s5"
+  end if
+  if p1state = "idle" then
+    p1inair = 0
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1inmove = 0
+    p1insuper = 0
+    if p1InEffect = 0 and p2inEffect = 0 and p3InEffect = 0 and p4inEffect = 0 then
+      sprite(20).locH = 1500
+      sprite(21).locH = 1500
+    end if
+    if chars(p1frame, 5, 5) <> "s" then
+      p1frame = "ryu_s1"
+    end if
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_s1"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_s2"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_s3"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_s4"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_s5"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_s6"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_s7"
+                else
+                  if p1movecount = 8 then
+                    p1lastframe = "ryu_s5"
+                  else
+                    if p1movecount = 9 then
+                      p1lastframe = "ryu_s3"
+                    else
+                      if p1movecount = 10 then
+                        p1lastframe = "ryu_s2"
+                        p1movecount = 0
+                      else
+                        if p1movecount = 11 then
+                          p1lastframe = "ryu_s3"
+                        else
+                          if p1movecount = 12 then
+                            p1lastframe = "ryu_s2"
+                            p1movecount = 0
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1frame = p1lastframe
+    sprite(p1SpriteNum).loc = point(p1x, p1y)
+  end if
+  if p1state = "intr" then
+    p1movecount = p1movecount + 1
+    if bMute = 0 then
+    else
+    end if
+    bInRound = 0
+    bReset = 0
+    bFinish = 0
+    if p1Real = "p1" then
+      member("ryu_i0").palette = 950
+      if bMute = 0 then
+      else
+      end if
+    else
+      if p1Real = "p2" then
+        member("ryu_i0").palette = 949
+      end if
+    end if
+    if p1movecount = 1 then
+      p1HitBox = rect(0, 0, 0, 0)
+      p2HitBox = rect(0, 0, 0, 0)
+      if bfirsttime then
+        Xframe = 1
+        p1HelperState = "intr"
+        p1HelperCount = 0
+        p2HelperState = "intr"
+        p2HelperCount = 0
+      end if
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      p1pr = 0
+      p1pl = 0
+      p1pu = 0
+      p1pd = 0
+      p2pr = 0
+      p2pl = 0
+      p2pu = 0
+      p2pd = 0
+      p1frame = "ryu_i2"
+      theSound = "snd_ready"
+      fnSound.PlayAny()
+      sprite(p1SpriteNum + 1).member = "ryu_i0"
+      sprite(p1SpriteNum + 1).ink = 36
+      if value(p1Rank) >= 1 then
+        if p1Real = "p1" then
+          sprite(206).member = "fnRank" & string(p1Rank)
+          sendSprite(206, #mFadeActivate)
+          sendSprite(206, #mSlideActivate)
+          sendSprite(207, #mFadeActivate)
+          sendSprite(207, #mSlideActivate)
+          if theConnection <> VOID then
+            cipherIn = "rank" & string(p1Rank)
+            theCipher.fnHardCrypt()
+            errorCode = theConnection.sendNetMessage(sPlayer2Name, "message@" & theChan, cipherOut)
+          end if
+        else
+          if p1Real = "p2" then
+            sprite(208).member = "fnRank" & string(p1Rank)
+            sendSprite(208, #mFadeActivate)
+            sendSprite(208, #mSlideActivate)
+            sendSprite(209, #mFadeActivate)
+            sendSprite(209, #mSlideActivate)
+            if theConnection <> VOID then
+              cipherIn = "rank" & string(p1Rank)
+              theCipher.fnHardCrypt()
+              errorCode = theConnection.sendNetMessage(sPlayer2Name, "message@" & theChan, cipherOut)
+            end if
+          end if
+        end if
+      end if
+    else
+      if p1movecount = 2 then
+        p1frame = "ryu_i3"
+      else
+        if p1movecount = 3 then
+          p1frame = "ryu_i4"
+        else
+          if p1movecount = 4 then
+            p1frame = "ryu_i5"
+          else
+            if p1movecount = 5 then
+              p1frame = "ryu_i6"
+            else
+              if p1movecount = 6 then
+                p1frame = "ryu_i7"
+              else
+                if p1movecount = 7 then
+                  p1frame = "ryu_i8"
+                else
+                  if p1movecount = 8 then
+                    p1frame = "ryu_i9"
+                  else
+                    if p1movecount = 9 then
+                      p1frame = "ryu_iA"
+                    else
+                      if p1movecount = 10 then
+                        p1frame = "ryu_iB"
+                      else
+                        if p1movecount = 11 then
+                          p1frame = "ryu_iC"
+                        else
+                          if p1movecount = 12 then
+                            p1frame = "ryu_iD"
+                          else
+                            if p1movecount = 13 then
+                              p1frame = "ryu_iE"
+                            else
+                              if p1movecount = 14 then
+                                p1frame = "ryu_iF"
+                              else
+                                if p1movecount = 15 then
+                                  if p1Real = "p1" then
+                                    sendSprite(200, #mFadeActivate)
+                                    sendSprite(200, #mSlideActivate)
+                                    bGo = 1
+                                    bInRound = 1
+                                    theSound = "snd_fight"
+                                    fnSound.PlayAny()
+                                    if theConnection <> VOID then
+                                      cipherIn = "go"
+                                      theCipher.fnHardCrypt()
+                                      errorCode = theConnection.sendNetMessage(sPlayer2Name, "message@" & theChan, cipherOut)
+                                      errorCode = theConnection.sendNetMessage(sPlayer2Name, "message@" & theChan, cipherOut)
+                                    end if
+                                  end if
+                                  if bMute = 0 then
+                                    sound(8).stop()
+                                    sound(8).volume = integer(iVolume.float * 2)
+                                    iLastTrack = iLastTrack + 1
+                                    if iLastTrack > iMaxTracks then
+                                      iLastTrack = 1
+                                    end if
+                                    sound(8).play([#member: member("track" & string(iTheTrack[iLastTrack])), #loopCount: 777])
+                                  else
+                                    member("tA").stop()
+                                  end if
+                                  p1frame = "ryu_s1"
+                                  p1lastframe = "ryu_s1"
+                                  p1state = "idle"
+                                  p1movecount = 0
+                                  p1Wins2 = p1Wins
+                                  p2Wins2 = p2Wins
+                                end if
+                              end if
+                            end if
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "win1" then
+    p1inmove = 1
+    p1inair = 0
+    p1state = "win1"
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_o1"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_o2"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_o3"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_o4"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_o5"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_o4"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_o3"
+                  p1movecount = 1
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1frame = p1lastframe
+    if bGo = 1 then
+      p1state = "idle"
+      p1movecount = 0
+    end if
+  end if
+  if p1state = "hit3" then
+    p1airmovecount = 0
+    p1airstate = EMPTY
+    p1inair = 1
+    p1inmove = 1
+    p1insuper = 0
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1Health - p1HealthOffset <= 0 then
+      p1state = "die1"
+      p1movecount = 0
+    end if
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_fe"
+      if p2insuper = 0 then
+        p1y = p1y - 25
+      end if
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_ff"
+        if p2insuper = 0 then
+          p1y = p1y - 25
+        end if
+      else
+        if p1movecount >= 3 and p1movecount < 10 then
+          if p2insuper = 0 then
+            p1y = p1y - 25
+          end if
+          p1lastframe = "ryu_fg"
+          if p1movecount >= 5 then
+            p1movecount = 9
+          end if
+        else
+          if p1movecount = 10 then
+            p1y = p1y - 25
+            p1lastframe = "ryu_yd"
+          else
+            if p1movecount = 11 then
+              p1y = p1y - 10
+              p1lastframe = "ryu_yc"
+            else
+              if p1movecount = 12 then
+                p1y = p1y + 10
+                p1lastframe = "ryu_yb"
+              else
+                if p1movecount = 13 then
+                  p1inair = 1
+                  p1inmove = 0
+                  p1insuper = 0
+                  p1airstate = EMPTY
+                  p1movecount = 0
+                  p1jumpcount = 0
+                  p1combo = EMPTY
+                  p1comboname = EMPTY
+                  p1lastcombo1 = EMPTY
+                  p1lastcombo2 = EMPTY
+                  p1lastcombo3 = EMPTY
+                  p1state = "jud2"
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1moveface = "right" then
+      if p1movecount <= 200 then
+        p1x = p1x - 20
+      end if
+    else
+      if p1moveface = "leftt" then
+        if p1movecount <= 200 then
+          p1x = p1x + 20
+        end if
+      end if
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "blo1" then
+    p1inair = 0
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_ba"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_bb"
+        if p1FACE = "right" then
+          if p1pl = 0 then
+            p1state = "idle"
+            p1inmove = 0
+            p1insuper = 0
+            p1movecount = 0
+          else
+            p1movecount = 1
+          end if
+        else
+          if p1FACE = "leftt" then
+            if p1pl = 0 then
+              p1state = "idle"
+              p1inmove = 0
+              p1insuper = 0
+              p1movecount = 0
+            else
+              p1movecount = 1
+            end if
+          end if
+        end if
+        p1movecount = 1
+      end if
+    end if
+    p1frame = p1lastframe
+  end if
+  if p1state = "blo2" then
+    p1inair = 0
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_bc"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_bd"
+        if p1FACE = "right" then
+          if p1pl = 0 then
+            p1state = "idle"
+            p1inmove = 0
+            p1insuper = 0
+            p1movecount = 0
+          else
+            p1movecount = 1
+          end if
+        else
+          if p1FACE = "leftt" then
+            if p1pl = 0 then
+              p1state = "idle"
+              p1inmove = 0
+              p1insuper = 0
+              p1movecount = 0
+            else
+              p1movecount = 1
+            end if
+          end if
+        end if
+        p1movecount = 1
+      end if
+    end if
+    p1frame = p1lastframe
+  end if
+  if p1state = "hit4" or p1state = "hit5" or p1state = "hit6" then
+    p1airmovecount = 0
+    p1airstate = EMPTY
+    p1inair = 1
+    p1inmove = 1
+    p1insuper = 0
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1Health - p1HealthOffset <= 0 then
+      p1state = "die1"
+      p1movecount = 0
+    end if
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_fe"
+      if p2Name = "ryu" and p2state.char[1..3] = "upr" then
+        p1y = p1y - 70
+      else
+        p1y = p1y - 15
+      end if
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_ff"
+        if p2Name = "ryu" and p2state.char[1..3] = "upr" then
+          p1y = p1y - 60
+        else
+          p1y = p1y - 15
+        end if
+      else
+        if p1movecount >= 3 and p1movecount < 10 then
+          if p2Name = "ryu" and p2state.char[1..3] = "upr" then
+            p1y = p1y - 50
+          else
+            p1y = p1y - 15
+          end if
+          p1lastframe = "ryu_fg"
+          if p1movecount >= 5 then
+            p1movecount = 9
+          end if
+        else
+          if p1movecount = 10 then
+            p1y = p1y - 15
+            p1lastframe = "ryu_yd"
+          else
+            if p1movecount = 11 then
+              p1y = p1y - 10
+              p1lastframe = "ryu_yc"
+            else
+              if p1movecount = 12 then
+                p1y = p1y + 10
+                p1lastframe = "ryu_yb"
+              else
+                if p1movecount = 13 then
+                  p1inair = 1
+                  p1inmove = 0
+                  p1insuper = 0
+                  p1airstate = EMPTY
+                  p1movecount = 0
+                  p1jumpcount = 0
+                  p1combo = EMPTY
+                  p1comboname = EMPTY
+                  p1lastcombo1 = EMPTY
+                  p1lastcombo2 = EMPTY
+                  p1lastcombo3 = EMPTY
+                  p1state = "jud2"
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1state = "hit4" then
+      if p1moveface = "right" then
+        if p1movecount <= 200 then
+          p1x = p1x - 40
+        end if
+      else
+        if p1moveface = "leftt" then
+          if p1movecount <= 200 then
+            p1x = p1x + 40
+          end if
+        end if
+      end if
+    end if
+    if p1state = "hit6" then
+      p1y = p1y - 15
+    end if
+    if p1moveface = "right" then
+      p1y = p1y - p2PushY
+      p1x = p1x + p2PushX
+    else
+      if p1moveface = "leftt" then
+        p1y = p1y - p2PushY
+        p1x = p1x - p2PushX
+      end if
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "hit2" then
+    p1airmovecount = 0
+    p1airstate = EMPTY
+    p2HitBox = VOID
+    p2SkipNextHitFrame = 1
+    p1inair = 0
+    p1inmove = 1
+    p1insuper = 0
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1Health - p1HealthOffset <= 0 then
+      p1state = "die1"
+      p1movecount = 0
+    end if
+    if p1movecount = 1 then
+      p1y = p1g
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_fn"
+      p1movecount = 2
+      p1moveface = p1FACE
+      if p1moveface = "right" then
+        p1x = p1x - 25
+      else
+        if p1moveface = "leftt" then
+          p1x = p1x + 25
+        end if
+      end if
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_fn"
+        if p1moveface = "right" then
+          p1x = p1x - 25
+        else
+          if p1moveface = "leftt" then
+            p1x = p1x + 25
+          end if
+        end if
+      else
+        if p1movecount = 3 then
+          if p1moveface = "right" then
+            p1x = p1x - 25
+          else
+            if p1moveface = "leftt" then
+              p1x = p1x + 25
+            end if
+          end if
+          p1lastframe = "ryu_fo"
+          theSound = "snd_land2"
+          fnSound.PlayAny()
+        else
+          if p1movecount = 4 then
+            if p1moveface = "right" then
+              p1x = p1x - 25
+            else
+              if p1moveface = "leftt" then
+                p1x = p1x + 25
+              end if
+            end if
+            p1lastframe = "ryu_fp"
+          else
+            if p1movecount = 5 then
+              if p1moveface = "right" then
+                p1x = p1x - 25
+              else
+                if p1moveface = "leftt" then
+                  p1x = p1x + 25
+                end if
+              end if
+              p1lastframe = "ryu_fl"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_fm"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_fq"
+                else
+                  if p1movecount = 8 then
+                    p1lastframe = "ryu_fr"
+                  else
+                    if p1movecount = 9 then
+                      p1lastframe = "ryu_fs"
+                    else
+                      if p1movecount = 10 then
+                        p1lastframe = "ryu_ft"
+                      else
+                        if p1movecount = 11 then
+                          p1lastframe = "ryu_yb"
+                        else
+                          if p1movecount = 12 then
+                            p1lastframe = "ryu_j1"
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1movecount >= 3 then
+      if p1moveface = "right" then
+      else
+        if p1moveface = "leftt" then
+        end if
+      end if
+    end if
+    if p1movecount >= 13 then
+      p1inmove = 0
+      p1insuper = 0
+      p1inmove = 0
+      p1insuper = 0
+      p1movecount = 0
+      p1state = "idle"
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "hit1" then
+    if p1FACE = p2FACE then
+      bQP1Flip = 1
+    end if
+    p1airmovecount = 0
+    p1airstate = EMPTY
+    p1inair = 0
+    p1inmove = 1
+    p1insuper = 0
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1Health - p1HealthOffset <= 0 then
+      p1state = "die1"
+      p1movecount = 0
+    end if
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      p1y = p1g
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_fa"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_fb"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_fc"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_fd"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_fd"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_fd"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_fc"
+                else
+                  if p1movecount = 8 then
+                    p1lastframe = "ryu_fb"
+                  else
+                    if p1movecount = 9 then
+                      p1lastframe = "ryu_fa"
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1movecount >= 3 then
+      if p1FACE = "right" then
+        p1x = p1x - p1maxwspeed
+      else
+        if p1FACE = "leftt" then
+          p1x = p1x + p1maxwspeed
+        end if
+      end if
+    end if
+    iHitOffset = 3
+    if p2Name = "wol" and (p2state.char[1..3] = "qcf" or p2state.char[1..3] = "suf") then
+      iHitOffset = -2
+    end if
+    if p1movecount >= 10 or p1movecount >= 3 and p1movecount >= p2MaxHit - iHitOffset then
+      p1inmove = 0
+      p1insuper = 0
+      p1inmove = 0
+      p1insuper = 0
+      p1movecount = 0
+      p1state = "idle"
+    end if
+    if p1moveface = "right" then
+      p1y = p1y - p2PushY
+      p1x = p1x + p2PushX
+    else
+      if p1moveface = "leftt" then
+        p1y = p1y - p2PushY
+        p1x = p1x - p2PushX
+      end if
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "die1" then
+    p1inair = 1
+    p1inmove = 1
+    p1insuper = 0
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1movecount = 1 then
+      p1y = p1g
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      p1moveface = p1FACE
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_fe"
+      p1y = p1y - 25
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_ff"
+        p1y = p1y - 25
+      else
+        if p1movecount >= 3 and p1movecount < 10 then
+          p1y = p1y - 25
+          p1lastframe = "ryu_fg"
+          if p1movecount >= 5 then
+            p1movecount = 9
+          end if
+        else
+          if p1movecount >= 10 and p1movecount < 20 then
+            p1y = p1y - 25
+            p1lastframe = "ryu_fh"
+            if p1movecount >= 11 then
+              p1movecount = 19
+            end if
+          else
+            if p1movecount >= 20 and p1movecount < 200 then
+              if sprite(GSpriteNum).locV - sprite(p1SpriteNum).locV <= p1g2 then
+                p1y = p1g
+                sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+                p1lastframe = "ryu_fj"
+                p1movecount = 200
+              else
+                p1lastframe = "ryu_fi"
+                p1y = p1y + 25
+              end if
+            else
+              if p1movecount = 201 then
+                p1y = p1y - 10
+                p1lastframe = "ryu_fj"
+              else
+                if p1movecount = 202 then
+                  theSound = "snd_land2"
+                  fnSound.PlayAny()
+                  p1y = p1y + 10
+                  p1lastframe = "ryu_fk"
+                else
+                  if p1movecount = 203 then
+                    p1y = p1y - 3
+                    p1lastframe = "ryu_fl"
+                  else
+                    if p1movecount = 204 then
+                      theSound = "snd_land2"
+                      fnSound.PlayAny()
+                      p1lastframe = "ryu_fm"
+                      p1y = p1g
+                      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1moveface = "right" then
+      if p1movecount <= 200 then
+        p1x = p1x - 20
+      end if
+    else
+      if p1moveface = "leftt" then
+        if p1movecount <= 200 then
+          p1x = p1x + 20
+        end if
+      end if
+    end if
+    if p1movecount >= 210 then
+      p1movecount = 210
+      p1state = "die1"
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "intr" then
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    sprite(p1SpriteNum + 1).member = "ryu_i0"
+    sprite(p1SpriteNum + 1).ink = 36
+    if p1frame <> "ryu_iF" then
+      p1lastframe = p1frame
+      if p1Real = "p1" and member("ryu_i0").palette <> 950 then
+        member("ryu_i0").palette = 950
+      else
+        if p1Real = "p2" and member("ryu_i0").palette <> 949 then
+          member("ryu_i0").palette = 949
+        end if
+      end if
+      sprite(p1SpriteNum).loc = point(p1x, p1y)
+      sprite(p1SpriteNum + 1).loc = point(p1x, p1y)
+    else
+      p1lastframe = p1frame
+      if p1Real = "p1" and member("ryu_i0").palette <> 950 then
+        member("ryu_i0").palette = 950
+      else
+        if p1Real = "p2" and member("ryu_i0").palette <> 949 then
+          member("ryu_i0").palette = 949
+        end if
+      end if
+      sprite(p1SpriteNum).loc = point(p1x, p1y)
+      sprite(p1SpriteNum + 1).loc = point(-500, 0)
+    end if
+  end if
+  if p1state = "down" then
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      p1frame = "ryu_d0"
+    else
+      if p1movecount = 2 then
+        p1frame = "ryu_d1"
+        p1movecount = 1
+      else
+        p1movecount = 1
+        sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+        p1frame = "ryu_d0"
+      end if
+    end if
+    p1lastframe = p1frame
+    sprite(p1SpriteNum).loc = point(p1x, p1y)
+  end if
+  if p1state = "suf1" or p1state = "suf2" or p1state = "suf3" then
+    if p1inair = 0 then
+      p1y = p1g
+    else
+      p1airstate = EMPTY
+      if sprite(GSpriteNum).locV - (sprite(p1SpriteNum).locV + 1) >= p1g2 then
+        p1y = p1y + 0.5
+      end if
+    end if
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1inmove = 1
+    p1insuper = 1
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      theSound = "snd_ryuhyper"
+      fnSound.PlayAny()
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1jumpcount = 0
+      p1airmovecount = 0
+      if p1inair = 1 then
+        p1lastframe = "ryu_qe"
+      else
+        p1lastframe = "ryu_qa"
+      end if
+      sprite(p1SpriteNum + 2).member = "ryu_beamH3"
+      sprite(p1SpriteNum + 3).locZ = 135
+      sprite(p1SpriteNum + 3).blend = 90
+      sprite(p1SpriteNum + 4).ink = 37
+      sprite(p1SpriteNum + 5).ink = 37
+    else
+      if p1movecount = 2 then
+        theSound = "snd_ryufball"
+        fnSound.PlayAny()
+        theSound = "snd_ryubeam"
+        fnSound.PlayAny()
+        if p1inair = 1 then
+          p1lastframe = "ryu_qf"
+        else
+          p1lastframe = "ryu_qa"
+        end if
+        if InduceSeizure = 1 then
+          sprite(10).locH = 192
+        end if
+      else
+        if p1movecount >= 3 and p1movecount < 60 and bEndSuper = 0 then
+          sprite(p1SpriteNum + 3).locZ = 135
+          sprite(p1SpriteNum + 3).blend = 90
+          sprite(p1SpriteNum + 4).ink = 37
+          sprite(p1SpriteNum + 5).ink = 37
+          p1airmovecount = p1airmovecount + 1
+          if p1movecount >= 5 and p1movecount <= 23 then
+            if p1airmovecount = 1 then
+              sprite(p1SpriteNum + 3).member = "ryu_cir1"
+            else
+              if p1airmovecount = 2 then
+                sprite(p1SpriteNum + 3).member = "ryu_cir2"
+              else
+                if p1airmovecount = 3 then
+                  sprite(p1SpriteNum + 3).member = "ryu_cir3"
+                else
+                  if p1airmovecount = 4 then
+                    sprite(p1SpriteNum + 3).member = "ryu_cir4"
+                  else
+                    if p1airmovecount = 5 then
+                      sprite(p1SpriteNum + 3).member = "ryu_cir5"
+                    else
+                      if p1airmovecount = 6 then
+                        sprite(p1SpriteNum + 3).member = "ryu_cir6"
+                      else
+                        if p1airmovecount = 7 then
+                          sprite(p1SpriteNum + 3).member = "ryu_cir7"
+                        else
+                          if p1airmovecount = 8 then
+                            sprite(p1SpriteNum + 3).member = "ryu_cir8"
+                            p1airmovecount = 0
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+            if p1moveface = "right" then
+              sprite(p1SpriteNum + 2).locH = p1x + 56
+              sprite(p1SpriteNum + 3).locH = p1x + 93
+            else
+              if p1moveface = "leftt" then
+                sprite(p1SpriteNum + 2).locH = p1x - 56
+                sprite(p1SpriteNum + 3).locH = p1x - 93
+              end if
+            end if
+            sprite(p1SpriteNum + 2).locV = p1y - 2
+            sprite(p1SpriteNum + 3).locV = p1y + 3
+            sprite(p1SpriteNum + 4).member = "ryu_beamDA"
+            sprite(p1SpriteNum + 5).member = "ryu_beamD1"
+            p1jumpcount = p1jumpcount + 1
+            if p1inair = 1 then
+              if p1lastframe = "ryu_qi" then
+                p1lastframe = "ryu_qj"
+                sprite(p1SpriteNum + 2).member = "ryu_beamH2"
+              else
+                p1lastframe = "ryu_qi"
+                sprite(p1SpriteNum + 2).member = "ryu_beamH3"
+              end if
+            else
+              if p1lastframe = "ryu_qb" then
+                p1lastframe = "ryu_qc"
+                sprite(p1SpriteNum + 2).member = "ryu_beamH2"
+              else
+                p1lastframe = "ryu_qb"
+                sprite(p1SpriteNum + 2).member = "ryu_beamH3"
+              end if
+            end if
+            if p1jumpcount = 1 then
+              sprite(p1SpriteNum + 5).member = "ryu_beamD2"
+            else
+              if p1jumpcount = 2 then
+                sprite(p1SpriteNum + 5).member = "ryu_beamD3"
+              else
+                if p1jumpcount = 3 then
+                  sprite(p1SpriteNum + 5).member = "ryu_beamD1"
+                  p1jumpcount = 0
+                end if
+              end if
+            end if
+            if p1moveface = "right" then
+              sprite(p1SpriteNum + 4).locH = p1x + 85
+              sprite(p1SpriteNum + 5).locH = p1x + 92
+            else
+              if p1moveface = "leftt" then
+                sprite(p1SpriteNum + 4).locH = p1x - 85
+                sprite(p1SpriteNum + 5).locH = p1x - 92
+              end if
+            end if
+            sprite(p1SpriteNum + 4).locV = p1y + 3
+            sprite(p1SpriteNum + 5).locV = p1y + 3
+            sprite(p1SpriteNum + 5).height = member("ryu_beamD1").height
+            if sprite(p1SpriteNum + 5).width < 300 then
+              sprite(p1SpriteNum + 5).width = 300
+            end if
+          else
+            if p1movecount < 5 then
+              sprite(p1SpriteNum + 2).locH = -500
+              sprite(p1SpriteNum + 4).member = "ryu_beamC0"
+              sprite(p1SpriteNum + 5).member = "ryu_beamC1"
+              if p1moveface = "right" then
+                sprite(p1SpriteNum + 4).locH = p1x + 80
+                sprite(p1SpriteNum + 5).locH = p1x + 92
+              else
+                if p1moveface = "leftt" then
+                  sprite(p1SpriteNum + 4).locH = p1x - 80
+                  sprite(p1SpriteNum + 5).locH = p1x - 92
+                end if
+              end if
+              sprite(p1SpriteNum + 4).locV = p1y + 3
+              sprite(p1SpriteNum + 5).locV = p1y + 3
+              sprite(p1SpriteNum + 5).height = member("ryu_beamC1").height
+              if sprite(p1SpriteNum + 5).width < 300 then
+                sprite(p1SpriteNum + 5).width = sprite(p1SpriteNum + 5).width + 100
+              end if
+            else
+              if p1inair = 1 then
+                if p1lastframe = "ryu_qi" then
+                  p1lastframe = "ryu_qj"
+                else
+                  p1lastframe = "ryu_qi"
+                end if
+              end if
+              sprite(p1SpriteNum + 2).locH = -500
+              sprite(p1SpriteNum + 3).locH = -500
+              sprite(p1SpriteNum + 4).locH = -500
+              sprite(p1SpriteNum + 5).locH = -500
+              if InduceSeizure = 1 then
+                sprite(10).locH = -1000
+              end if
+            end if
+          end if
+          if p1movecount >= 30 then
+            p1movecount = 59
+          end if
+        else
+          if p1movecount = 60 or bEndSuper = 1 then
+            bEndSuper = 0
+            p1inmove = 0
+            p1insuper = 0
+            p1inmove = 0
+            p1insuper = 0
+            p1movecount = 0
+            p1jumpcount = 0
+            p1aircount = 0
+            if p1inair = 1 then
+              p1state = "jud2"
+            else
+              p1state = "idle"
+            end if
+            sprite(p1SpriteNum + 2).locH = -500
+            sprite(p1SpriteNum + 3).locH = -500
+            sprite(p1SpriteNum + 4).locH = -500
+            sprite(p1SpriteNum + 5).locH = -500
+            sprite(p1SpriteNum + 3).blend = 100
+            sprite(p1SpriteNum + 4).ink = 36
+            sprite(p1SpriteNum + 5).ink = 36
+            sprite(p1SpriteNum + 5).width = 62
+            sprite(p1SpriteNum + 3).locZ = 90
+          end if
+        end if
+      end if
+    end if
+    theScript.fnCheckEdge()
+    if p1movecount = 1 and p3state.char[1..2] <> "su" then
+      p1InEffect = 1
+      theScript.fnHyperEffect()
+    end if
+  end if
+  if p1state = "sub4" or p1state = "sub5" or p1state = "sub6" then
+    p1inmove = 1
+    p1insuper = 1
+    p1inair = 1
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1movecount = 1 then
+      p1y = p1g
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      theSound = "snd_ryuhyper"
+      fnSound.PlayAny()
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1jumpcount = 0
+      p1lastframe = "ryu_ci"
+      sprite(p1SpriteNum + 2).locZ = 95
+    else
+      if p1movecount = 2 then
+        theSound = "snd_ryuspin"
+        fnSound.PlayAny()
+        theSound = "snd_ryubeam"
+        fnSound.PlayAny()
+        p1lastframe = "ryu_cj"
+        if InduceSeizure = 1 then
+          sprite(10).locH = 192
+        end if
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_ca"
+          p1y = p1y - 42
+          sprite(p1SpriteNum - 1).ink = 37
+          sprite(p1SpriteNum - 1).blend = 80
+          sprite(p1SpriteNum + 2).ink = 33
+          sprite(p1SpriteNum + 3).ink = 33
+          sprite(p1SpriteNum + 2).locH = p1x
+          sprite(p1SpriteNum + 3).locH = p1x
+          sprite(p1SpriteNum + 2).locV = p1y + 122
+          sprite(p1SpriteNum + 3).locV = p1y + 122
+          sprite(p1SpriteNum + 2).flipH = 0
+          sprite(p1SpriteNum + 3).flipH = 1
+          sprite(p1SpriteNum + 2).member = "ryu_chop5"
+          sprite(p1SpriteNum + 3).member = "ryu_chop5"
+        else
+          if p1movecount >= 4 and p1movecount < 60 then
+            sprite(p1SpriteNum - 1).ink = 37
+            sprite(p1SpriteNum - 1).blend = 80
+            sprite(p1SpriteNum + 2).ink = 33
+            sprite(p1SpriteNum + 3).ink = 33
+            sprite(p1SpriteNum + 2).locH = p1x
+            sprite(p1SpriteNum + 3).locH = p1x
+            sprite(p1SpriteNum + 2).locV = p1y + 122
+            sprite(p1SpriteNum + 3).locV = p1y + 122
+            p1y = p1g - 42
+            if chars(p1frame, 5, 5) <> "c" then
+              p1lastframe = "ryu_cd"
+            end if
+            if p1lastframe = "ryu_cd" then
+              p1lastframe = "ryu_ca"
+              member(p1lastframe).palette = 950
+              member("ryu_cd").palette = 953
+              sprite(p1SpriteNum - 1).member = member("ryu_cd")
+              sprite(p1SpriteNum - 1).loc = point(p1x, p1y)
+            else
+              if p1lastframe = "ryu_ca" then
+                p1lastframe = "ryu_cb"
+                member(p1lastframe).palette = 950
+                member("ryu_ca").palette = 953
+                sprite(p1SpriteNum - 1).member = member("ryu_ca")
+                sprite(p1SpriteNum - 1).loc = point(p1x, p1y)
+              else
+                if p1lastframe = "ryu_cb" then
+                  p1lastframe = "ryu_cc"
+                  member(p1lastframe).palette = 950
+                  member("ryu_cb").palette = 953
+                  sprite(p1SpriteNum - 1).member = member("ryu_cb")
+                  sprite(p1SpriteNum - 1).loc = point(p1x, p1y)
+                else
+                  if p1lastframe = "ryu_cc" then
+                    p1lastframe = "ryu_cd"
+                    member(p1lastframe).palette = 950
+                    member("ryu_cc").palette = 953
+                    sprite(p1SpriteNum - 1).member = member("ryu_cc")
+                    sprite(p1SpriteNum - 1).loc = point(p1x, p1y)
+                    if p1movecount >= 27 then
+                      p1movecount = 59
+                    end if
+                  else
+                    p1lastframe = "ryu_cd"
+                  end if
+                end if
+              end if
+            end if
+            p1jumpcount = p1jumpcount + 1
+            sprite(p1SpriteNum + 2).locH = p1x
+            sprite(p1SpriteNum + 3).locH = p1x
+            sprite(p1SpriteNum + 2).locV = p1y + 122
+            sprite(p1SpriteNum + 3).locV = p1y + 122
+            if p4Active and (p4state.char[1..3] <> "sub" or p4name <> "ryu") then
+              if p4x > p1x then
+                if p4x - p1x <= 165 then
+                  p4x = p4x - 28
+                else
+                  p4x = p4x - 10
+                end if
+              else
+                if p1x - p4x <= 165 then
+                  p4x = p4x + 28
+                else
+                  p4x = p4x + 10
+                end if
+              end if
+            end if
+            if p2Active and (p2state.char[1..3] <> "sub" or p2Name <> "ryu") then
+              if p2x > p1x then
+                if p2x - p1x <= 165 then
+                  p2x = p2x - 28
+                else
+                  p2x = p2x - 10
+                end if
+              else
+                if p1x - p2x <= 165 then
+                  p2x = p2x + 28
+                else
+                  p2x = p2x + 10
+                end if
+              end if
+            end if
+            sprite(p1SpriteNum + 2).flipH = 0
+            sprite(p1SpriteNum + 3).flipH = 1
+            if p1jumpcount = 1 then
+              sprite(p1SpriteNum + 2).member = "ryu_chop2"
+              sprite(p1SpriteNum + 3).member = "ryu_chop2"
+            else
+              if p1jumpcount = 2 then
+                sprite(p1SpriteNum + 2).member = "ryu_chop3"
+                sprite(p1SpriteNum + 3).member = "ryu_chop3"
+              else
+                if p1jumpcount = 3 then
+                  sprite(p1SpriteNum + 2).member = "ryu_chop4"
+                  sprite(p1SpriteNum + 3).member = "ryu_chop4"
+                else
+                  if p1jumpcount = 4 then
+                    sprite(p1SpriteNum + 2).member = "ryu_chop5"
+                    sprite(p1SpriteNum + 3).member = "ryu_chop5"
+                  else
+                    if p1jumpcount = 5 then
+                      sprite(p1SpriteNum + 2).member = "ryu_chop1"
+                      sprite(p1SpriteNum + 3).member = "ryu_chop1"
+                      p1jumpcount = 0
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          else
+            if p1movecount = 60 then
+              bEndSuper = 0
+              if InduceSeizure = 1 then
+                sprite(10).locH = -1000
+              end if
+              member("ryu_ca").palette = 950
+              member("ryu_cb").palette = 950
+              member("ryu_cc").palette = 950
+              member("ryu_cd").palette = 950
+              sprite(p1SpriteNum - 1).loc = point(-500, p1y)
+              sprite(p1SpriteNum - 1).ink = 36
+              sprite(p1SpriteNum - 1).blend = 100
+              if p1moveface = "right" then
+                sprite(p1SpriteNum + 2).flipH = 0
+                sprite(p1SpriteNum + 3).flipH = 0
+              else
+                if p1moveface = "leftt" then
+                  sprite(p1SpriteNum + 2).flipH = 1
+                  sprite(p1SpriteNum + 3).flipH = 1
+                end if
+              end if
+              sprite(p1SpriteNum + 2).locH = -500
+              sprite(p1SpriteNum + 3).locH = -500
+              sprite(p1SpriteNum + 2).ink = 36
+              sprite(p1SpriteNum + 3).ink = 36
+              p1lastframe = "ryu_hf"
+              p1y = p1y + 20
+            else
+              if p1movecount = 61 then
+                p1lastframe = "ryu_hg"
+                p1y = p1y + 12
+              else
+                if p1movecount = 62 then
+                  p1y = p1y + 10
+                  p1inmove = 0
+                  p1insuper = 0
+                  p1inmove = 0
+                  p1insuper = 0
+                  p1inair = 0
+                  p1movecount = 0
+                  p1jumpcount = 0
+                  p1state = "idle"
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    theScript.fnCheckEdge()
+    if p1movecount = 1 then
+      p1InEffect = 1
+      theScript.fnHyperEffect()
+    end if
+  end if
+  if p1state = "upr1" or p1state = "upr2" or p1state = "upr3" then
+    p1inmove = 1
+    p1inair = 1
+    p1insuper = 1
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      p1y = p1g
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      theSound = "snd_ryuupr"
+      fnSound.PlayAny()
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_9b"
+      p1jcount = 0
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_wb"
+        p1jcount = p1jcount + 1
+      else
+        if p1movecount >= 3 and p1movecount <= 30 then
+          p1lastframe = "ryu_wb"
+          if p1state = "upr1" then
+            if p1moveface = "right" then
+              p1x = p1x + p1maxwspeed
+            else
+              if p1moveface = "leftt" then
+                p1x = p1x - p1maxwspeed
+              end if
+            end if
+            p1y = p1y - (p1maxjspeed - 5)
+            if p1movecount = 6 then
+              p1movecount = 31
+            end if
+          end if
+          if p1state = "upr2" then
+            if p1moveface = "right" then
+              p1x = p1x + (p1maxwspeed + 5)
+            else
+              if p1moveface = "leftt" then
+                p1x = p1x - (p1maxwspeed + 5)
+              end if
+            end if
+            p1y = p1y - p1maxjspeed
+            if p1movecount = 8 then
+              p1movecount = 31
+            end if
+          end if
+          if p1state = "upr3" then
+            if p1movecount = 9 then
+              p1movecount = 31
+            end if
+            if p1moveface = "right" then
+              p1x = p1x + (p1maxwspeed + 10)
+            else
+              if p1moveface = "leftt" then
+                p1x = p1x - (p1maxwspeed + 10)
+              end if
+            end if
+            p1y = p1y - (p1maxjspeed + 5)
+          end if
+          p1jcount = p1jcount + 1
+        else
+          if p1movecount >= 31 and p1movecount <= 60 then
+            if p1lastframe = "ryu_wb" then
+              p1lastframe = "ryu_wc"
+            else
+              if p1lastframe = "ryu_wc" then
+                p1lastframe = "ryu_wd"
+              end if
+            end if
+            if p1state = "upr1" then
+              p1y = p1y + (p1maxjspeed - 5)
+            end if
+            if p1state = "upr2" then
+              p1y = p1y + p1maxjspeed
+            end if
+            if p1state = "upr3" then
+              p1y = p1y + (p1maxjspeed + 5)
+            end if
+            p1jcount = p1jcount - 1
+            if p1jcount = 1 then
+              p1movecount = 61
+            end if
+          else
+            if p1movecount = 61 then
+              if p1state = "upr1" then
+                p1y = p1y + (p1maxjspeed - 5)
+              end if
+              if p1state = "upr2" then
+                p1y = p1y + p1maxjspeed
+              end if
+              if p1state = "upr3" then
+                p1y = p1y + (p1maxjspeed + 5)
+              end if
+              p1lastframe = "ryu_we"
+            else
+              if p1movecount >= 62 then
+                p1lastframe = "ryu_wf"
+                p1inair = 0
+                p1inmove = 0
+                p1insuper = 0
+                p1inmove = 0
+                p1insuper = 0
+                p1movecount = 0
+                p1state = "idle"
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "qcf1" or p1state = "qcf2" or p1state = "qcf3" then
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1inmove = 1
+    p1insuper = 1
+    p1movecount = p1movecount + 1
+    p1frame = p1lastframe
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      theSound = "snd_ryufball"
+      fnSound.PlayAny()
+      theSound = "snd_ryufballwoosh"
+      fnSound.PlayAny()
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_qa"
+      p1fballcount = 0
+      if p1state = "qcf1" then
+        p1fballspeed = integer(float(40 - iAFPS + 40) * 0.25)
+        p1fballRatio = integer(float(float(0.25) * 1000))
+      end if
+      if p1state = "qcf2" then
+        p1fballspeed = integer(float(40 - iAFPS + 40) * 0.32500000000000001)
+        p1fballRatio = integer(float(float(0.32500000000000001) * 1000))
+      end if
+      if p1state = "qcf3" then
+        p1fballspeed = integer(float(40 - iAFPS + 40) * 0.375)
+        p1fballRatio = integer(float(float(0.375) * 1000))
+      end if
+    else
+      if p1movecount >= 2 and p1movecount <= 10 then
+        p1fball = "ryub"
+        if p1lastframe = "ryu_qb" then
+          p1lastframe = "ryu_qc"
+        else
+          p1lastframe = "ryu_qb"
+        end if
+      else
+        if p1movecount >= 11 then
+          p1inmove = 0
+          p1insuper = 0
+          p1inmove = 0
+          p1insuper = 0
+          p1movecount = 0
+          p1state = "idle"
+        end if
+      end if
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "acf1" or p1state = "acf2" or p1state = "acf3" then
+    p1airstate = EMPTY
+    p1inmove = 1
+    p1insuper = 1
+    p1airmovecount = p1airmovecount + 1
+    p1frame = p1lastframe
+    if sprite(GSpriteNum).locV - (sprite(p1SpriteNum).locV + 1) >= p1g2 then
+      p1y = p1y + 1
+    end if
+    if p1airmovecount = 1 then
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_qd"
+      p1fballcount = 0
+      if p1state = "acf1" then
+        p1fballspeed = integer(float(40 - iAFPS + 40) * 0.25)
+        p1fballRatio = integer(float(float(0.25) * 1000))
+      end if
+      if p1state = "acf2" then
+        p1fballspeed = integer(float(40 - iAFPS + 40) * 0.32500000000000001)
+        p1fballRatio = integer(float(float(0.32500000000000001) * 1000))
+      end if
+      if p1state = "acf3" then
+        p1fballspeed = integer(float(40 - iAFPS + 40) * 0.375)
+        p1fballRatio = integer(float(float(0.375) * 1000))
+      end if
+    else
+      if p1airmovecount = 2 then
+        p1lastframe = "ryu_qe"
+      else
+        if p1airmovecount = 3 then
+          p1lastframe = "ryu_qf"
+          p1moveface = p1FACE
+          theSound = "snd_ryufball"
+          fnSound.PlayAny()
+          theSound = "snd_ryufballwoosh"
+          fnSound.PlayAny()
+        else
+          if p1airmovecount >= 4 and p1airmovecount <= 7 then
+            p1fball = "ryub"
+            if p1lastframe = "ryu_qg" then
+              p1lastframe = "ryu_qh"
+            else
+              p1lastframe = "ryu_qg"
+            end if
+          else
+            if p1airmovecount >= 8 then
+              p1inmove = 0
+              p1insuper = 0
+              p1inmove = 0
+              p1insuper = 0
+              p1airmovecount = 0
+              p1lastframe = "ryu_j4"
+              p1jumpcount = 0
+              p1state = "jud2"
+            end if
+          end if
+        end if
+      end if
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "qcb4" or p1state = "qcb5" or p1state = "qcb6" then
+    p1inmove = 1
+    p1inair = 1
+    p1insuper = 1
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      p1y = p1g
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      theSound = "snd_ryuspin"
+      fnSound.PlayAny()
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_h0"
+      p1y = p1y - 25
+      if p1moveface = "right" then
+        p1x = p1x + 20
+      else
+        if p1moveface = "leftt" then
+          p1x = p1x - 20
+        end if
+      end if
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_ha"
+        p1y = p1y - 5
+        if p1moveface = "right" then
+          p1x = p1x + 5
+        else
+          if p1moveface = "leftt" then
+            p1x = p1x - 5
+          end if
+        end if
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_hb"
+          p1y = p1y - 15
+          if p1moveface = "right" then
+            p1x = p1x + 10
+          else
+            if p1moveface = "leftt" then
+              p1x = p1x - 10
+            end if
+          end if
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_hb"
+            if p1moveface = "right" then
+              p1x = p1x + 10
+            else
+              if p1moveface = "leftt" then
+                p1x = p1x - 10
+              end if
+            end if
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_hc"
+              if p1moveface = "right" then
+                p1x = p1x + 20
+              else
+                if p1moveface = "leftt" then
+                  p1x = p1x - 20
+                end if
+              end if
+            else
+              if p1movecount >= 6 and p1movecount < 30 then
+                if chars(p1frame, 5, 5) <> "c" then
+                  p1lastframe = "ryu_cd"
+                end if
+                if p1lastframe = "ryu_cd" then
+                  p1lastframe = "ryu_ca"
+                else
+                  if p1lastframe = "ryu_ca" then
+                    p1lastframe = "ryu_cb"
+                  else
+                    if p1lastframe = "ryu_cb" then
+                      p1lastframe = "ryu_cc"
+                    else
+                      if p1lastframe = "ryu_cc" then
+                        p1lastframe = "ryu_cd"
+                        if p1state = "qcb4" then
+                          p1movecount = 29
+                        else
+                          if p1state = "qcb5" then
+                            if p1movecount >= 13 then
+                              p1movecount = 29
+                            end if
+                          else
+                            if p1state = "qcb6" then
+                              if p1movecount >= 17 then
+                                p1movecount = 29
+                              end if
+                            end if
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+                if p1moveface = "right" then
+                  p1x = p1x + 10
+                else
+                  if p1moveface = "leftt" then
+                    p1x = p1x - 10
+                  end if
+                end if
+              else
+                if p1movecount = 30 then
+                  p1lastframe = "ryu_ce"
+                  p1y = p1y + 15
+                  if p1moveface = "right" then
+                    p1x = p1x + 40
+                  else
+                    if p1moveface = "leftt" then
+                      p1x = p1x - 40
+                    end if
+                  end if
+                else
+                  if p1movecount = 31 then
+                    p1lastframe = "ryu_cf"
+                    p1y = p1y + 10
+                    if p1moveface = "right" then
+                      p1x = p1x + 7
+                    else
+                      if p1moveface = "leftt" then
+                        p1x = p1x - 7
+                      end if
+                    end if
+                  else
+                    if p1movecount = 32 then
+                      p1lastframe = "ryu_cg"
+                      p1y = p1y + 10
+                      if p1moveface = "right" then
+                        p1x = p1x + 7
+                      else
+                        if p1moveface = "leftt" then
+                          p1x = p1x - 7
+                        end if
+                      end if
+                    else
+                      if p1movecount = 33 then
+                        p1lastframe = "ryu_ch"
+                        p1y = p1y + 5
+                        if p1moveface = "right" then
+                          p1x = p1x + 7
+                        else
+                          if p1moveface = "leftt" then
+                            p1x = p1x - 7
+                          end if
+                        end if
+                      else
+                        if p1movecount = 34 then
+                          p1y = p1y + 5
+                          p1lastframe = "ryu_d1"
+                          p1state = "idle"
+                          p1inmove = 0
+                          p1insuper = 0
+                          p1inair = 0
+                          p1movecount = 0
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1frame = p1lastframe
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "punf" then
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1inair = 0
+    p1inmove = 1
+    p1insuper = 1
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      theSound = "snd_ryup3"
+      fnSound.PlayAny()
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_pa"
+    else
+      if p1movecount = 5 then
+        p1lastframe = "ryu_pa"
+      else
+        if p1movecount = 6 then
+          p1lastframe = "ryu_pb"
+          if p1moveface = "right" then
+            p1x = p1x + 10
+          else
+            if p1moveface = "leftt" then
+              p1x = p1x - 10
+            end if
+          end if
+        else
+          if p1movecount = 7 then
+            p1lastframe = "ryu_pc"
+            if p1moveface = "right" then
+              p1x = p1x + 10
+            else
+              if p1moveface = "leftt" then
+                p1x = p1x - 10
+              end if
+            end if
+          else
+            if p1movecount = 8 then
+              p1lastframe = "ryu_pc"
+              p1HitBox = VOID
+              p1SkipNextHitFrame = 1
+              if p1moveface = "right" then
+                p1x = p1x + 10
+              else
+                if p1moveface = "leftt" then
+                  p1x = p1x - 10
+                end if
+              end if
+              theSound = "snd_ryugive1"
+              fnSound.PlayAny()
+            else
+              if p1movecount = 9 then
+                p1lastframe = "ryu_pd"
+                if p1moveface = "right" then
+                  p1x = p1x + 10
+                else
+                  if p1moveface = "leftt" then
+                    p1x = p1x - 10
+                  end if
+                end if
+              else
+                if p1movecount = 10 then
+                  p1lastframe = "ryu_pd"
+                  p1HitBox = VOID
+                  p1SkipNextHitFrame = 1
+                  p1state = "idle"
+                  p1inmove = 0
+                  p1insuper = 0
+                  p1movecount = 0
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1frame = p1lastframe
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "kicf" then
+    p1inair = 1
+    p1inmove = 1
+    p1insuper = 1
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      p1y = p1g
+      sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+      theSound = "snd_ryup3"
+      fnSound.PlayAny()
+      p1lastcombo = EMPTY
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1lastframe = "ryu_h0"
+      p1y = p1y - 25
+      if p1moveface = "right" then
+        p1x = p1x + 20
+      else
+        if p1moveface = "leftt" then
+          p1x = p1x - 20
+        end if
+      end if
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_ha"
+        p1y = p1y - 5
+        if p1moveface = "right" then
+          p1x = p1x + 5
+        else
+          if p1moveface = "leftt" then
+            p1x = p1x - 5
+          end if
+        end if
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_hb"
+          p1y = p1y - 15
+          if p1moveface = "right" then
+            p1x = p1x + 10
+          else
+            if p1moveface = "leftt" then
+              p1x = p1x - 10
+            end if
+          end if
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_hb"
+            if p1moveface = "right" then
+              p1x = p1x + 10
+            else
+              if p1moveface = "leftt" then
+                p1x = p1x - 10
+              end if
+            end if
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_hc"
+              if p1moveface = "right" then
+                p1x = p1x + 20
+              else
+                if p1moveface = "leftt" then
+                  p1x = p1x - 20
+                end if
+              end if
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_hd"
+                p1y = p1y + 15
+                if p1moveface = "right" then
+                  p1x = p1x + 15
+                else
+                  if p1moveface = "leftt" then
+                    p1x = p1x - 15
+                  end if
+                end if
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_he"
+                  if p1moveface = "right" then
+                    p1x = p1x + 40
+                  else
+                    if p1moveface = "leftt" then
+                      p1x = p1x - 40
+                    end if
+                  end if
+                else
+                  if p1movecount = 8 then
+                    p1lastframe = "ryu_hf"
+                    p1y = p1y + 15
+                    if p1moveface = "right" then
+                      p1x = p1x + 7
+                    else
+                      if p1moveface = "leftt" then
+                        p1x = p1x - 7
+                      end if
+                    end if
+                    theSound = "snd_ryugive1"
+                    fnSound.PlayAny()
+                  else
+                    if p1movecount = 9 then
+                      p1lastframe = "ryu_hg"
+                      p1y = p1y + 15
+                      if p1moveface = "right" then
+                        p1x = p1x + 7
+                      else
+                        if p1moveface = "leftt" then
+                          p1x = p1x - 7
+                        end if
+                      end if
+                    else
+                      if p1movecount = 10 then
+                        p1lastframe = "ryu_d1"
+                        p1state = "idle"
+                        p1inair = 0
+                        p1inmove = 0
+                        p1insuper = 0
+                        p1movecount = 0
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1frame = p1lastframe
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "kid1" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup1"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_ka"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_jb"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_ka"
+          p1state = "down"
+          p1inmove = 0
+          p1movecount = 0
+        end if
+      end if
+    end if
+  end if
+  if p1state = "kid2" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup2"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_ka"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_kb"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_kb"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_kc"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_ka"
+              p1state = "down"
+              p1inmove = 0
+              p1movecount = 0
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "kid3" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup3"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_la"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_la"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_lb"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_lb"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_lc"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_ld"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_ld"
+                else
+                  if p1movecount = 8 then
+                    p1lastframe = "ryu_le"
+                    p1state = "down"
+                    p1inmove = 0
+                    p1movecount = 0
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "pud1" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup1"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_7a"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_7b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_7a"
+          p1state = "down"
+          p1inmove = 0
+          p1movecount = 0
+        end if
+      end if
+    end if
+  end if
+  if p1state = "pud2" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup2"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_8a"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_8b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_8b"
+          p1state = "down"
+          p1inmove = 0
+          p1movecount = 0
+        end if
+      end if
+    end if
+  end if
+  if p1state = "pud3" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup3"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_9z"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_9b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_9a"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_9a"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_9b"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_9b"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_9z"
+                  p1state = "down"
+                  p1inmove = 0
+                  p1movecount = 0
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "kic1" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup1"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_4a"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_4b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_4b"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_4c"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_if"
+              p1state = "idle"
+              p1inmove = 0
+              p1movecount = 0
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "kic2" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup2"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_4c"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_5b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_5b"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_5c"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_5c"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_if"
+                p1state = "idle"
+                p1inmove = 0
+                p1movecount = 0
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "kic3" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup3"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_6a"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_6b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_6b"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_6c"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_6c"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_6d"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_6e"
+                  p1state = "idle"
+                  p1inmove = 0
+                  p1movecount = 0
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "tau1" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryugive2"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_za"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_zb"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_zc"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_zc"
+          else
+            if p1movecount = 12 then
+              p1lastframe = "ryu_zc"
+              p1state = "idle"
+              p1inmove = 0
+              p1movecount = 0
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "pun1" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup1"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_1a"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_1b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_1b"
+          p1state = "idle"
+          p1inmove = 0
+          p1movecount = 0
+        end if
+      end if
+    end if
+  end if
+  if p1state = "pun2" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup2"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_2a"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_2b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_2b"
+          p1HitBox = VOID
+          p1SkipNextHitFrame = 1
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_2b"
+            p1HitBox = VOID
+            p1SkipNextHitFrame = 1
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_2c"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_2d"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_2d"
+                  p1state = "idle"
+                  p1inmove = 0
+                  p1movecount = 0
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "pun3" then
+    p1y = p1g
+    p1inair = 0
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      theSound = "snd_ryup3"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_1a"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_3b"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_3b"
+          p1HitBox = VOID
+          p1SkipNextHitFrame = 1
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_3b"
+            p1HitBox = VOID
+            p1SkipNextHitFrame = 1
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_3c"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_3c"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_2d"
+                else
+                  if p1movecount = 8 then
+                    p1lastframe = "ryu_2d"
+                    p1state = "idle"
+                    p1inmove = 0
+                    p1movecount = 0
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "jubg" then
+    p1inair = 1
+    if p1jumpcount = 0 then
+      theSound = "snd_jubg1"
+      fnSound.PlayAny()
+    end if
+    p1jumpcount = p1jumpcount + 1
+    p1movecount = p1movecount + 1
+    if p1jumpcount = 1 then
+      p1SuperJumpCount = p1SuperJumpCount + 1
+    end if
+    if p1jumpcount < 3 then
+      p1moveface = p1FACE
+      p1combo = EMPTY
+      p1comboname = EMPTY
+      p1lastcombo1 = EMPTY
+      p1lastcombo2 = EMPTY
+      p1lastcombo3 = EMPTY
+      p1y = p1y - p1maxjspeed
+      if chars(p1frame, 5, 5) <> "y" then
+        p1lastframe = "ryu_j1"
+      end if
+      p1jcount = 0
+      if p1FACE = "right" then
+        if p1pr then
+          p1frame = "ryu_ya"
+          p1lastframe = "ryu_ya"
+          p1movecoutn = 0
+          p1jumpstate = "forw"
+        end if
+        if p1pl then
+          p1frame = "ryu_ya"
+          p1lastframe = "ryu_ya"
+          p1movecoutn = 0
+          p1jumpstate = "back"
+        end if
+      end if
+      if p1FACE = "leftt" then
+        if p1pl then
+          p1frame = "ryu_ya"
+          p1lastframe = "ryu_ya"
+          p1movecoutn = 0
+          p1jumpstate = "back"
+        end if
+        if p1pr then
+          p1frame = "ryu_ya"
+          p1lastframe = "ryu_ya"
+          p1movecoutn = 0
+          p1jumpstate = "forw"
+        end if
+      end if
+    else
+      if p1jumpcount = 4 then
+        p1lastframe = "ryu_j2"
+      else
+        if p1jumpcount = 5 then
+          p1lastframe = "ryu_j3"
+        else
+          if p1jumpcount = 6 then
+            p1lastframe = "ryu_j4"
+          end if
+        end if
+      end if
+    end if
+    p1y = p1y - p1maxjspeed
+    if chars(p1frame, 5, 5) <> "y" then
+      if p1jcount <= p1maxheight - 3 then
+        p1lastframe = "ryu_j3"
+      else
+        p1lastframe = "ryu_j4"
+      end if
+    end if
+    p1frame = p1lastframe
+    p1jcount = p1jcount + 1
+    if p1jumpstate = "forw" then
+      if p1movecount = 1 then
+        p1lastframe = "ryu_ya"
+      else
+        if p1movecount = 2 then
+          p1lastframe = "ryu_yb"
+        else
+          if p1movecount = 3 then
+            p1lastframe = "ryu_yc"
+          else
+            if p1movecount = 4 then
+              p1lastframe = "ryu_yd"
+            else
+              if p1movecount = 5 then
+                p1lastframe = "ryu_ye"
+              else
+                if p1movecount = 6 then
+                  p1lastframe = "ryu_j3"
+                  p1airstate = EMPTY
+                else
+                  if p1movecount > 7 then
+                    p1movecount = 7
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+      if p1moveface = "right" then
+        p1x = p1x + p1maxjwspeed + 10
+      else
+        if p1moveface = "leftt" then
+          p1x = p1x - p1maxjwspeed - 10
+        end if
+      end if
+      theScript.fnCheckEdge()
+    end if
+    if p1jumpstate = "back" then
+      if p1movecount = 1 then
+        p1lastframe = "ryu_ye"
+      else
+        if p1movecount = 2 then
+          p1lastframe = "ryu_yd"
+        else
+          if p1movecount = 3 then
+            p1lastframe = "ryu_yc"
+          else
+            if p1movecount = 4 then
+              p1lastframe = "ryu_yb"
+            else
+              if p1movecount = 5 then
+                p1lastframe = "ryu_ya"
+              else
+                if p1movecount = 6 then
+                  p1lastframe = "ryu_j3"
+                  p1airstate = EMPTY
+                else
+                  if p1movecount > 7 then
+                    p1movecount = 7
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+      if p1moveface = "right" then
+        p1x = p1x - p1maxjwspeed - 10
+      else
+        if p1moveface = "leftt" then
+          p1x = p1x + p1maxjwspeed + 10
+        end if
+      end if
+      theScript.fnCheckEdge()
+    end if
+    if p1jcount >= p1maxheight then
+      p1lastframe = "ryu_j4"
+      p1movecount = 0
+      p1jumpcount = 0
+      p1jcount = p1jcount + 3
+      p1state = "jud2"
+      p1jumpstate = EMPTY
+    end if
+  end if
+  if p1state = "jud2" then
+    p1y = p1y + p1maxjspeed
+    p1jcount = p1jcount - 1
+    p1jumpcount = p1jumpcount + 1
+    if p1jumpcount < 2 then
+      p1lastframe = "ryu_j4"
+    else
+      if p1lastframe = "ryu_j5" then
+        p1lastframe = "ryu_j7"
+      else
+        if p1lastframe = "ryu_j7" then
+          p1lastframe = "ryu_j5"
+        else
+          p1lastframe = "ryu_j5"
+        end if
+      end if
+    end if
+    if sprite(GSpriteNum).locV - p1y <= sprite(GSpriteNum).locV - p1g then
+      p1lastframe = "ryu_j6"
+      p1y = p1g
+      p1jumpcount = 0
+      p1state = "idle"
+      p1airstate = EMPTY
+      p1inair = 0
+      p1inmove = 0
+      p1insuper = 0
+      theSound = "snd_land1"
+      fnSound.PlayAny()
+    end if
+    theScript.fnCheckEdge()
+  end if
+  if p1state = "das1" then
+    p1inmove = 0
+    p1inair = 0
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      if p1pl = 1 then
+        p1state = "das2"
+        p1movecount = 0
+      end if
+      p1moveface = p1FACE
+      p1lastframe = "ryu_xa"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_xc"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_xc"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_xc"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_xc"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_xd"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_xb"
+                else
+                  if p1movecount >= 8 then
+                    p1lastframe = "ryu_if"
+                    theSound = "snd_land1"
+                    fnSound.PlayAny()
+                    p1state = "idle"
+                    p1movecount = 0
+                    p1insuper = 0
+                    p1inmove = 0
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if not sprite(p1SpriteNum).intersects(p2SpriteNum) and not sprite(p1SpriteNum).intersects(p4SpriteNum) then
+      if p1moveface = "right" then
+        p1x = p1x + 20
+      else
+        if p1moveface = "leftt" then
+          p1x = p1x - 20
+        end if
+      end if
+    end if
+  end if
+  if p1state = "das2" then
+    p1inair = 0
+    p1inmove = 0
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1moveface = p1FACE
+      p1lastframe = "ryu_xb"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_xe"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_xe"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_xe"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_xe"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_xf"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_xa"
+                else
+                  if p1movecount >= 8 then
+                    p1lastframe = "ryu_if"
+                    p1y = p1g
+                    p1state = "idle"
+                    p1movecount = 0
+                    p1insuper = 0
+                    p1inmove = 0
+                    theSound = "snd_land1"
+                    fnSound.PlayAny()
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1moveface = "right" then
+      p1x = p1x - 20
+    else
+      if p1moveface = "leftt" then
+        p1x = p1x + 20
+      end if
+    end if
+  end if
+  if p1state = "juup" then
+    p1inair = 1
+    if p1airstate <> EMPTY then
+      p1airmovedone = 1
+    end if
+    p1jumpcount = p1jumpcount + 1
+    if p1jumpcount < 3 then
+      p1lastframe = "ryu_j1"
+    else
+      if p1jumpcount = 4 then
+        p1lastframe = "ryu_j2"
+      else
+        if p1jumpcount = 5 then
+          p1lastframe = "ryu_j3"
+        else
+          if p1jumpcount = 6 then
+            p1lastframe = "ryu_j4"
+            p1jumpcount = 0
+            p1state = "judw"
+          end if
+        end if
+      end if
+    end if
+    p1y = p1y - p1maxjspeed
+  end if
+  if p1state = "judw" then
+    if p1airstate <> EMPTY then
+      p1airmovedone = 1
+    end if
+    p1jumpcount = p1jumpcount + 1
+    if p1jumpcount < 2 then
+      p1lastframe = "ryu_j4"
+    else
+      if p1jumpcount = 3 then
+        p1lastframe = "ryu_j5"
+      else
+        if p1jumpcount = 6 then
+          p1lastframe = "ryu_j6"
+          p1jumpcount = 0
+          p1state = "idle"
+          p1airstate = EMPTY
+          p1inair = 0
+          theSound = "snd_land1"
+          fnSound.PlayAny()
+        end if
+      end if
+    end if
+    p1y = p1y + p1maxjspeed
+  end if
+  if p1state = "jufo" then
+    p1inair = 1
+    p1jumpcount = p1jumpcount + 1
+    if p1jumpcount = 1 then
+      p1lastframe = "ryu_ya"
+    else
+      if p1jumpcount = 2 then
+        p1lastframe = "ryu_yb"
+      else
+        if p1jumpcount = 3 then
+          p1lastframe = "ryu_yc"
+        else
+          if p1jumpcount = 4 then
+            p1lastframe = "ryu_yd"
+          else
+            if p1jumpcount = 5 then
+              p1lastframe = "ryu_ye"
+            else
+              if p1jumpcount >= 6 then
+                p1lastframe = "ryu_j5"
+                if p1FACE = "right" then
+                  p1state = "jufd"
+                else
+                  if p1FACE = "leftt" then
+                    p1state = "jubd"
+                  end if
+                end if
+                p1jumpcount = 0
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1FACE = "right" then
+      p1x = p1x + p1maxjwspeed
+    else
+      if p1FACE = "leftt" then
+        p1x = p1x - p1maxjwspeed
+      end if
+    end if
+    theScript.fnCheckEdge()
+    p1y = p1y - p1maxjspeed
+  end if
+  if p1state = "jufd" then
+    p1jumpcount = p1jumpcount + 1
+    p1x = p1x + p1maxjwspeed
+    theScript.fnCheckEdge()
+    if p1jumpcount = 1 then
+      p1lastframe = "ryu_j4"
+    else
+      if p1jumpcount = 2 then
+        p1lastframe = "ryu_j5"
+      else
+        if p1jumpcount = 3 then
+          p1lastframe = "ryu_j5"
+        else
+          if p1jumpcount = 4 then
+            p1lastframe = "ryu_j5"
+          else
+            if p1jumpcount = 5 then
+              p1lastframe = "ryu_j5"
+            else
+              if p1jumpcount >= 6 then
+                p1lastframe = "ryu_j6"
+                p1state = "idle"
+                p1inmove = 0
+                p1inair = 0
+                p1jumpcount = 0
+                theSound = "snd_land1"
+                fnSound.PlayAny()
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1y = p1y + p1maxjspeed
+    if p1y >= 125 then
+      p1airstate = EMPTY
+    end if
+  end if
+  if p1state = "juba" then
+    p1inair = 1
+    p1jumpcount = p1jumpcount + 1
+    if p1jumpcount = 1 then
+      p1lastframe = "ryu_ye"
+    else
+      if p1jumpcount = 2 then
+        p1lastframe = "ryu_yd"
+      else
+        if p1jumpcount = 3 then
+          p1lastframe = "ryu_yc"
+        else
+          if p1jumpcount = 4 then
+            p1lastframe = "ryu_yb"
+          else
+            if p1jumpcount = 5 then
+              p1lastframe = "ryu_ya"
+            else
+              if p1jumpcount >= 6 then
+                p1lastframe = "ryu_j5"
+                if p1FACE = "right" then
+                  p1state = "jubd"
+                else
+                  if p1FACE = "leftt" then
+                    p1state = "jufd"
+                  end if
+                end if
+                p1jumpcount = 0
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if p1FACE = "right" then
+      p1x = p1x - p1maxjwspeed
+    else
+      if p1FACE = "leftt" then
+        p1x = p1x + p1maxjwspeed
+      end if
+    end if
+    theScript.fnCheckEdge()
+    p1y = p1y - p1maxjspeed
+  end if
+  if p1state = "jubd" then
+    p1jumpcount = p1jumpcount + 1
+    p1x = p1x - p1maxjwspeed
+    theScript.fnCheckEdge()
+    if p1jumpcount = 1 then
+      p1lastframe = "ryu_j4"
+    else
+      if p1jumpcount = 2 then
+        p1lastframe = "ryu_j5"
+      else
+        if p1jumpcount = 3 then
+          p1lastframe = "ryu_j5"
+        else
+          if p1jumpcount = 4 then
+            p1lastframe = "ryu_j5"
+          else
+            if p1jumpcount = 5 then
+              p1lastframe = "ryu_j5"
+            else
+              if p1jumpcount >= 6 then
+                p1lastframe = "ryu_j6"
+                p1state = "idle"
+                p1inmove = 0
+                p1inair = 0
+                p1jumpcount = 0
+                theSound = "snd_land1"
+                fnSound.PlayAny()
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1y = p1y + p1maxjspeed
+  end if
+  if p1state = "back" then
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_b1"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_b2"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_b3"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_b4"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_b5"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_b6"
+                p1movecount = 0
+              else
+                p1lastframe = "ryu_b1"
+                p1movecount = 0
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1frame = p1lastframe
+  end if
+  if p1state = "forw" then
+    p1y = p1g
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_f1"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_f2"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_f3"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_f4"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_f5"
+              p1movecount = 0
+            else
+              p1lastframe = "ryu_f1"
+              p1movecount = 0
+            end if
+          end if
+        end if
+      end if
+    end if
+    p1frame = p1lastframe
+    sprite(p1SpriteNum).loc = point(p1x, p1y)
+  end if
+  if p1state = "wait" then
+    theXTIMEFPS = theXTIMEFPSdefault
+    p1x = 899
+    p1inmove = 0
+    p1insuper = 0
+    p1movecount = 0
+  else
+    theXTIMEFPS = theXTIMEFPSdefault
+  end if
+  if p1state = "inin" then
+    theXTIMEFPS = 5
+    p1inair = 1
+    p1movecount = p1movecount + 1
+    p1inmove = 1
+    p1insuper = 1
+    if p1movecount = 2 then
+      theSound = "snd_ryup2"
+      fnSound.PlayAny()
+      theSound = "snd_ryugive2"
+      fnSound.PlayAny()
+      p1lastframe = "ryu_y5"
+      if p3FACE = "right" then
+        if p2Active then
+          p1x = -60
+        else
+          if p4Active then
+            p1x = -60
+          end if
+        end if
+        p1y = 65
+        p1FACE = "right"
+        p1moveface = "right"
+        theScript.fnFlip1()
+      else
+        if p3FACE = "leftt" then
+          if p2Active then
+            p1x = 384 + 60
+          else
+            if p4Active then
+              p1x = 384 + 60
+            end if
+          end if
+          p1y = 65
+          p1FACE = "leftt"
+          p1moveface = "leftt"
+          theScript.fnFlip1()
+        end if
+      end if
+    else
+      if p1movecount >= 2 and p1movecount <= 60 then
+        p1lastframe = "ryu_y5"
+        p1y = p1y + 4
+        if p1moveface = "right" then
+          p1x = p1x + 35
+          if p1x >= 384 - 50 then
+            p1movecount = 60
+          end if
+        else
+          if p1moveface = "leftt" then
+            p1x = p1x - 35
+            if p1x <= 50 then
+              p1movecount = 60
+            end if
+          end if
+        end if
+        if sprite(p1SpriteNum).intersects(p2SpriteNum) or sprite(p1SpriteNum).intersects(p4SpriteNum) then
+          p1movecount = 60
+        end if
+        if p1y >= p1g - 15 then
+          p1movecount = 60
+        end if
+      else
+        if p1movecount >= 61 then
+          p1lastframe = "ryu_y5"
+          p1movecount = 0
+          p1state = "jud2"
+          p1inmove = 0
+          p1insuper = 0
+          p1inair = 1
+        end if
+      end if
+    end if
+  end if
+  if p1state = "outt" then
+    p1y = p1g
+    theXTIMEFPS = 10
+    p1SkipNextHitFrame = 1
+    p1inair = 1
+    p1movecount = p1movecount + 1
+    p1inmove = 1
+    p1insuper = 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_o1"
+      p1moveface = p1FACE
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_o2"
+      else
+        if p1movecount = 3 then
+          p1lastframe = "ryu_o3"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_o4"
+          else
+            if p1movecount = 5 then
+              p1lastframe = "ryu_o5"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_o4"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_o3"
+                else
+                  if p1movecount = 8 then
+                    p1lastframe = "ryu_o2"
+                  else
+                    if p1movecount = 9 then
+                      p1lastframe = "ryu_wf"
+                    else
+                      if p1movecount = 10 then
+                        p1lastframe = "ryu_xb"
+                      else
+                        if p1movecount >= 11 and p1movecount <= 60 then
+                          p1lastframe = "ryu_xe"
+                          if p1moveface = "right" then
+                            p1x = p1x - 15
+                          else
+                            if p1moveface = "leftt" then
+                              p1x = p1x + 15
+                            end if
+                          end if
+                          if p1x <= -70 then
+                            p1movecount = 60
+                          else
+                            if p1x >= 384 + 70 then
+                              p1movecount = 60
+                            end if
+                          end if
+                        else
+                          if p1movecount = 61 then
+                            p1lastframe = "ryu_xe"
+                            p1movecount = 0
+                            p1state = "wait"
+                            p1inmove = 0
+                            p1insuper = 0
+                            p1inair = 1
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+  if p1state = "cros" then
+    theXTIMEFPS = 10
+    p1SkipNextHitFrame = 1
+    p1inair = 1
+    p1movecount = p1movecount + 1
+    p1inmove = 1
+    p1insuper = 1
+    if p1movecount = 1 then
+      p1lastframe = "ryu_xc"
+      if p3FACE = "right" then
+        if p2Active then
+          p1x = -60
+        else
+          if p4Active then
+            p1x = -60
+          end if
+        end if
+        p1y = p1g
+        p1FACE = "right"
+        p1moveface = "right"
+        theScript.fnFlip1()
+      else
+        if p3FACE = "leftt" then
+          if p2Active then
+            p1x = 384 + 60
+          else
+            if p4Active then
+              p1x = 384 + 60
+            end if
+          end if
+          p1y = p1g
+          p1FACE = "leftt"
+          p1moveface = "leftt"
+          theScript.fnFlip1()
+        end if
+      end if
+    else
+      if p1movecount >= 2 and p1movecount <= 60 then
+        p1lastframe = "ryu_xc"
+        if p1moveface = "right" then
+          p1x = p1x - 30
+          if p3x - p1x > 50 or p3x < 20 + 50 then
+            p1x = p3x - 50
+            if p1x < 20 then
+              p1x = 20
+            end if
+            p1movecount = 60
+          end if
+        else
+          if p1moveface = "leftt" then
+            p1x = p1x + 30
+            if p1x - p3x > 50 or p3x < 384 - 20 - 50 then
+              p1x = p3x + 50
+              if p1x > 384 + 20 then
+                p1x = 384 - 20
+              end if
+              p1movecount = 60
+            end if
+          end if
+        end if
+      else
+        if p1movecount = 61 then
+          p1lastframe = "ryu_xc"
+          p1movecount = 0
+          p1state = "suf1"
+          p1inmove = 0
+          p1insuper = 0
+          p1inair = 1
+        end if
+      end if
+    end if
+  end if
+  if p1state = "inhp" then
+    p1inair = 0
+    p1movecount = p1movecount + 1
+    if p1movecount = 1 then
+      p1inmove = 1
+      p1insuper = 1
+      p1moveface = p1FACE
+      p1lastframe = "ryu_xa"
+    else
+      if p1movecount = 2 then
+        p1lastframe = "ryu_xc"
+      else
+        if p1movecount = 3 then
+          p1inmove = 0
+          p1insuper = 0
+          p1lastframe = "ryu_xc"
+        else
+          if p1movecount = 4 then
+            p1lastframe = "ryu_xc"
+          else
+            if p1movecount = 5 then
+              p1inmove = 0
+              p1insuper = 0
+              p1lastframe = "ryu_xc"
+            else
+              if p1movecount = 6 then
+                p1lastframe = "ryu_xd"
+              else
+                if p1movecount = 7 then
+                  p1lastframe = "ryu_xb"
+                else
+                  if p1movecount >= 8 then
+                    p1lastframe = "ryu_if"
+                    theSound = "snd_land1"
+                    fnSound.PlayAny()
+                    p1state = "idle"
+                    p1movecount = 0
+                    p1insuper = 0
+                    p1inmove = 0
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+    if not sprite(p1SpriteNum).intersects(p2SpriteNum) and not sprite(p1SpriteNum).intersects(p4SpriteNum) then
+      if p1moveface = "right" then
+        p1x = p1x + 20
+      else
+        if p1moveface = "leftt" then
+          p1x = p1x - 20
+        end if
+      end if
+    end if
+  end if
+  if p1inair = 1 or p1airstate <> EMPTY then
+    if p1airstate = "pun1" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        theSound = "snd_ryup1"
+        fnSound.PlayAny()
+        p1lastframe = "ryu_u1"
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_u2"
+        else
+          if p1airmovecount = 3 then
+            p1lastframe = "ryu_u2"
+            p1airstate = EMPTY
+            p1inmove = 0
+          end if
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+    if p1airstate = "pun2" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        theSound = "snd_ryup2"
+        fnSound.PlayAny()
+        p1lastframe = "ryu_u3"
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_u4"
+        else
+          if p1airmovecount = 3 then
+            p1lastframe = "ryu_u5"
+          else
+            if p1airmovecount = 4 then
+              p1lastframe = "ryu_u6"
+            else
+              if p1airmovecount = 5 then
+                p1lastframe = "ryu_u6"
+                p1airstate = EMPTY
+                p1inmove = 0
+              end if
+            end if
+          end if
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+    if p1airstate = "pun3" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        theSound = "snd_ryup3"
+        fnSound.PlayAny()
+        p1lastframe = "ryu_u1"
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_u7"
+        else
+          if p1airmovecount = 3 then
+            p1lastframe = "ryu_u8"
+          else
+            if p1airmovecount = 4 then
+              p1lastframe = "ryu_u8"
+            else
+              if p1airmovecount = 5 then
+                p1lastframe = "ryu_u1"
+                p1airstate = EMPTY
+                p1inmove = 0
+              end if
+            end if
+          end if
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+    if p1airstate = "kic1" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        theSound = "snd_ryup1"
+        fnSound.PlayAny()
+        p1lastframe = "ryu_y1"
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_y2"
+        else
+          if p1airmovecount = 3 then
+            p1lastframe = "ryu_y3"
+          else
+            if p1airmovecount = 4 then
+              p1lastframe = "ryu_y3"
+              p1airstate = EMPTY
+              p1inmove = 0
+            end if
+          end if
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+    if p1airstate = "kic2" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        theSound = "snd_ryup2"
+        fnSound.PlayAny()
+        p1lastframe = "ryu_y1"
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_y4"
+        else
+          if p1airmovecount = 3 then
+            p1lastframe = "ryu_y5"
+          else
+            if p1airmovecount = 4 then
+              p1lastframe = "ryu_y5"
+            else
+              if p1airmovecount = 5 then
+                p1lastframe = "ryu_y4"
+                p1airstate = EMPTY
+                p1inmove = 0
+              end if
+            end if
+          end if
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+    if p1airstate = "kic3" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        theSound = "snd_ryup3"
+        fnSound.PlayAny()
+        p1lastframe = "ryu_y4"
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_y5"
+        else
+          if p1airmovecount = 3 then
+            p1lastframe = "ryu_y5"
+          else
+            if p1airmovecount = 4 then
+              p1lastframe = "ryu_y4"
+              p1airstate = EMPTY
+              p1inmove = 0
+            end if
+          end if
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+    if p1airstate = "bloa" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        p1lastframe = "ryu_be"
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_be"
+          p1airstate = EMPTY
+          p1inmove = 0
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+    if p1airstate = "qcb4" or p1airstate = "qcb5" or p1airstate = "qcb6" then
+      p1airmovecount = p1airmovecount + 1
+      if p1airmovecount = 1 then
+        p1airmoveface = p1FACE
+        theSound = "snd_ryuspin"
+        fnSound.PlayAny()
+        p1lastcombo = EMPTY
+        p1combo = EMPTY
+        p1comboname = EMPTY
+        p1lastcombo1 = EMPTY
+        p1lastcombo2 = EMPTY
+        p1lastcombo3 = EMPTY
+        p1lastframe = "ryu_h0"
+        p1lastframe = "ryu_ha"
+        p1airmovecount = 4
+      else
+        if p1airmovecount = 2 then
+          p1lastframe = "ryu_ha"
+        else
+          if p1airmovecount = 3 then
+            p1lastframe = "ryu_hb"
+          else
+            if p1airmovecount = 4 then
+              p1lastframe = "ryu_hb"
+            else
+              if p1airmovecount = 5 then
+                p1lastframe = "ryu_hc"
+              else
+                if p1airmovecount = 6 then
+                  p1lastframe = "ryu_ca"
+                else
+                  if p1airmovecount = 7 then
+                    p1lastframe = "ryu_cb"
+                  else
+                    if p1airmovecount = 8 then
+                      p1lastframe = "ryu_cc"
+                    else
+                      if p1airmovecount = 9 then
+                        p1lastframe = "ryu_cd"
+                        if p1airstate = "qcb4" then
+                          p1airmovecount = 29
+                        end if
+                      else
+                        if p1airmovecount = 10 then
+                          p1lastframe = "ryu_ca"
+                        else
+                          if p1airmovecount = 11 then
+                            p1lastframe = "ryu_cb"
+                          else
+                            if p1airmovecount = 12 then
+                              p1lastframe = "ryu_cc"
+                            else
+                              if p1airmovecount = 13 then
+                                p1lastframe = "ryu_cd"
+                                if p1airstate = "qcb5" then
+                                  p1airmovecount = 29
+                                end if
+                              else
+                                if p1airmovecount = 14 then
+                                  p1lastframe = "ryu_ca"
+                                else
+                                  if p1airmovecount = 15 then
+                                    p1lastframe = "ryu_cb"
+                                  else
+                                    if p1airmovecount = 16 then
+                                      p1lastframe = "ryu_cc"
+                                    else
+                                      if p1airmovecount = 17 then
+                                        p1lastframe = "ryu_cd"
+                                        if p1airstate = "qcb4" then
+                                          p1airmovecount = 29
+                                        end if
+                                      else
+                                        if p1airmovecount = 30 then
+                                          p1lastframe = "ryu_ce"
+                                        else
+                                          if p1airmovecount = 31 then
+                                            p1lastframe = "ryu_cf"
+                                          else
+                                            if p1airmovecount = 32 then
+                                              p1lastframe = "ryu_cg"
+                                            else
+                                              if p1airmovecount = 33 then
+                                                p1lastframe = "ryu_ch"
+                                              else
+                                                if p1airmovecount = 34 then
+                                                  p1insuper = 0
+                                                  p1airmovecount = 0
+                                                  p1airstate = EMPTY
+                                                  p1inmove = 0
+                                                end if
+                                              end if
+                                            end if
+                                          end if
+                                        end if
+                                      end if
+                                    end if
+                                  end if
+                                end if
+                              end if
+                            end if
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+      p1frame = p1lastframe
+    end if
+  end if
+end
+
+on fnBypassGlitches
+  if p1state.char[1..3] = "hit" or p1state.char[1..3] = "die" or p1state = "outt" or p1Active = 0 then
+    if sprite(p1SpriteNum + 2).locH <> 899 then
+      sprite(p1SpriteNum + 2).locH = 899
+    end if
+    if sprite(p1SpriteNum + 3).locH <> 899 then
+      sprite(p1SpriteNum + 3).locH = 899
+    end if
+    if sprite(p1SpriteNum + 4).locH <> 899 then
+      sprite(p1SpriteNum + 4).locH = 899
+    end if
+    if sprite(p1SpriteNum + 5).locH <> 899 then
+      sprite(p1SpriteNum + 5).locH = 899
+    end if
+  end if
+  if p1movecount >= 3 and p1movecount < 60 and p1state.char[1..3] = "suf" then
+    if sprite(p1SpriteNum + 2).flipH <> sprite(p1SpriteNum).flipH then
+      sprite(p1SpriteNum + 2).flipH = sprite(p1SpriteNum).flipH
+    end if
+    if sprite(p1SpriteNum + 3).flipH <> sprite(p1SpriteNum).flipH then
+      sprite(p1SpriteNum + 3).flipH = sprite(p1SpriteNum).flipH
+    end if
+    if sprite(p1SpriteNum + 4).flipH <> sprite(p1SpriteNum).flipH then
+      sprite(p1SpriteNum + 4).flipH = sprite(p1SpriteNum).flipH
+    end if
+    if sprite(p1SpriteNum + 5).flipH <> sprite(p1SpriteNum).flipH then
+      sprite(p1SpriteNum + 5).flipH = sprite(p1SpriteNum).flipH
+    end if
+    bPlayedHyperSound = 0
+    sprite(p1SpriteNum + 3).locZ = 135
+    sprite(p1SpriteNum + 3).blend = 90
+    sprite(p1SpriteNum + 4).ink = 37
+    sprite(p1SpriteNum + 5).ink = 37
+    if p1movecount >= 5 and p1movecount <= 23 then
+      if p1airmovecount = 1 then
+        sprite(p1SpriteNum + 3).member = "ryu_cir1"
+      else
+        if p1airmovecount = 2 then
+          sprite(p1SpriteNum + 3).member = "ryu_cir2"
+        else
+          if p1airmovecount = 3 then
+            sprite(p1SpriteNum + 3).member = "ryu_cir3"
+          else
+            if p1airmovecount = 4 then
+              sprite(p1SpriteNum + 3).member = "ryu_cir4"
+            else
+              if p1airmovecount = 5 then
+                sprite(p1SpriteNum + 3).member = "ryu_cir5"
+              else
+                if p1airmovecount = 6 then
+                  sprite(p1SpriteNum + 3).member = "ryu_cir6"
+                else
+                  if p1airmovecount = 7 then
+                    sprite(p1SpriteNum + 3).member = "ryu_cir7"
+                  else
+                    if p1airmovecount = 8 then
+                      sprite(p1SpriteNum + 3).member = "ryu_cir8"
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+      if p1FACE = "right" then
+        sprite(p1SpriteNum + 2).locH = sprite(p1SpriteNum).locH + 56
+        sprite(p1SpriteNum + 3).locH = sprite(p1SpriteNum).locH + 93
+      else
+        if p1FACE = "leftt" then
+          sprite(p1SpriteNum + 2).locH = sprite(p1SpriteNum).locH - 56
+          sprite(p1SpriteNum + 3).locH = sprite(p1SpriteNum).locH - 93
+        end if
+      end if
+      sprite(p1SpriteNum + 2).locV = sprite(p1SpriteNum).locV - 2
+      sprite(p1SpriteNum + 3).locV = sprite(p1SpriteNum).locV + 3
+      if p1inair = 1 then
+      else
+      end if
+      if p1jumpcount = 1 then
+      else
+        if p1jumpcount = 2 then
+        else
+          if p1jumpcount = 3 then
+          end if
+        end if
+      end if
+      if p1FACE = "right" then
+        sprite(p1SpriteNum + 4).locH = sprite(p1SpriteNum).locH + 85
+        sprite(p1SpriteNum + 5).locH = sprite(p1SpriteNum).locH + 92
+      else
+        if p1FACE = "leftt" then
+          sprite(p1SpriteNum + 4).locH = sprite(p1SpriteNum).locH - 85
+          sprite(p1SpriteNum + 5).locH = sprite(p1SpriteNum).locH - 92
+        end if
+      end if
+      sprite(p1SpriteNum + 4).locV = sprite(p1SpriteNum).locV + 3
+      sprite(p1SpriteNum + 5).locV = sprite(p1SpriteNum).locV + 3
+      sprite(p1SpriteNum + 5).height = member("ryu_beamD1").height
+      if sprite(p1SpriteNum + 5).width < 300 then
+        sprite(p1SpriteNum + 5).width = 300
+      end if
+    else
+      if p1movecount < 5 then
+        sprite(p1SpriteNum + 2).locH = -500
+        sprite(p1SpriteNum + 4).member = "ryu_beamC0"
+        sprite(p1SpriteNum + 5).member = "ryu_beamC1"
+        if p1FACE = "right" then
+          sprite(p1SpriteNum + 4).locH = sprite(p1SpriteNum).locH + 80
+          sprite(p1SpriteNum + 5).locH = sprite(p1SpriteNum).locH + 92
+        else
+          if p1FACE = "leftt" then
+            sprite(p1SpriteNum + 4).locH = sprite(p1SpriteNum).locH - 80
+            sprite(p1SpriteNum + 5).locH = sprite(p1SpriteNum).locH - 92
+          end if
+        end if
+        sprite(p1SpriteNum + 4).locV = sprite(p1SpriteNum).locV + 3
+        sprite(p1SpriteNum + 5).locV = sprite(p1SpriteNum).locV + 3
+        sprite(p1SpriteNum + 5).height = member("ryu_beamC1").height
+        if sprite(p1SpriteNum + 5).width < 300 then
+          sprite(p1SpriteNum + 5).width = sprite(p1SpriteNum + 5).width + 100
+        end if
+      else
+        if p1inair = 1 then
+          if p1lastframe = "ryu_qi" then
+          else
+          end if
+        end if
+        sprite(p1SpriteNum + 2).locH = -500
+        sprite(p1SpriteNum + 3).locH = -500
+        sprite(p1SpriteNum + 4).locH = -500
+        sprite(p1SpriteNum + 5).locH = -500
+        if InduceSeizure = 1 then
+          sprite(10).locH = -1000
+        end if
+      end if
+    end if
+  end if
+  if p1fball <> EMPTY then
+    sprite(p1SpriteNum + 1).locV = sprite(GSpriteNum).locV + p1fballyoffset
+  end if
+  if sprite(p1SpriteNum).locV > sprite(GSpriteNum).locV - p1g2 then
+    p1y = sprite(GSpriteNum).locV - p1g2
+    sprite(p1SpriteNum).locV = sprite(GSpriteNum).locV - p1g2
+  end if
+end
+
+on fnDisplayP1
+  p1ytemp = 224 - p1y
+  if (p1Real = "p1" or p1Real = "p3") and member(p1lastframe).palette <> 950 or p1Special and member(p1lastframe).palette <> p1SpecialColour then
+    if p1Special then
+      member(p1lastframe).palette = p1SpecialColour
+    else
+      member(p1lastframe).palette = 950
+    end if
+    if p1state = "intr" then
+      if p1Special then
+        member("ryu_i0").palette = p1SpecialColour
+      else
+        member("ryu_i0").palette = 950
+      end if
+    end if
+  else
+    if (p1Real = "p2" or p1Real = "p4") and member(p1lastframe).palette <> 949 or p1Special and member(p1lastframe).palette <> p1SpecialColour then
+      if p1Special then
+        member(p1lastframe).palette = p1SpecialColour
+      else
+        member(p1lastframe).palette = 949
+      end if
+      if p1state = "intr" then
+        if p1Special then
+          member("ryu_i0").palette = p1SpecialColour
+        else
+          member("ryu_i0").palette = 949
+        end if
+      end if
+    end if
+  end if
+  if sprite(p1SpriteNum).member <> member(p1lastframe) then
+    sprite(p1SpriteNum).member = member(p1lastframe)
+  end if
+  if not (string(fnKeyScript) contains "2") then
+    sprite(p1SpriteNum).loc = point(p1x, p1y)
+  else
+    sprite(p1SpriteNum).loc = point(p1x, sprite(GSpriteNum).locV - p1ytemp)
+  end if
+end
+
+on fnStateFrames
+  if sStateFrames = "intr" then
+    iStateFrames = 15
+  else
+    if sStateFrames = "win1" then
+      iStateFrames = 7
+    else
+      if sStateFrames = "hit3" then
+        iStateFrames = 13
+      else
+        if sStateFrames = "blo1" then
+          iStateFrames = 2
+        else
+          if sStateFrames = "blo2" then
+            iStateFrames = 2
+          else
+            if sStateFrames = "hit4" then
+              iStateFrames = 13
+            else
+              if sStateFrames = "hit5" then
+                iStateFrames = 13
+              else
+                if sStateFrames = "hit2" then
+                  iStateFrames = 13
+                else
+                  if sStateFrames = "hit1" then
+                    iStateFrames = 5
+                  else
+                    if sStateFrames = "die1" then
+                      iStateFrames = 1
+                    else
+                      if sStateFrames = "idle" then
+                        iStateFrames = 1
+                      else
+                        if sStateFrames = "down" then
+                          iStateFrames = 2
+                        else
+                          if sStateFrames.char[1..3] = "suf" then
+                            iStateFrames = 15
+                          else
+                            if sStateFrames.char[1..3] = "sub" then
+                              iStateFrames = 15
+                            else
+                              if sStateFrames = "upr1" then
+                                iStateFrames = 4 * 2 + 2
+                              else
+                                if sStateFrames = "upr2" then
+                                  iStateFrames = 5 * 2 + 2
+                                else
+                                  if sStateFrames = "upr3" then
+                                    iStateFrames = 6 * 2 + 2
+                                  else
+                                    if sStateFrames.char[1..3] = "qcf" then
+                                      iStateFrames = 7
+                                    else
+                                      if sStateFrames.char[1..3] = "acf" then
+                                        iStateFrames = 5
+                                      else
+                                        if sStateFrames = "qcb4" then
+                                          iStateFrames = 8
+                                        else
+                                          if sStateFrames = "qcb5" then
+                                            iStateFrames = 13
+                                          else
+                                            if sStateFrames = "qcb6" then
+                                              iStateFrames = 17
+                                            else
+                                              if sStateFrames = "punf" then
+                                                iStateFrames = 10
+                                              else
+                                                if sStateFrames = "kicf" then
+                                                  iStateFrames = 10
+                                                else
+                                                  if sStateFrames = "kid1" then
+                                                    iStateFrames = 3
+                                                  else
+                                                    if sStateFrames = "kid2" then
+                                                      iStateFrames = 5
+                                                    else
+                                                      if sStateFrames = "kid3" then
+                                                        iStateFrames = 8
+                                                      else
+                                                        if sStateFrames = "pud1" then
+                                                          iStateFrames = 2
+                                                        else
+                                                          if sStateFrames = "pud2" then
+                                                            iStateFrames = 3
+                                                          else
+                                                            if sStateFrames = "pud3" then
+                                                              iStateFrames = 7
+                                                            else
+                                                              if sStateFrames = "kic1" then
+                                                                iStateFrames = 5
+                                                              else
+                                                                if sStateFrames = "kic2" then
+                                                                  iStateFrames = 6
+                                                                else
+                                                                  if sStateFrames = "kic3" then
+                                                                    iStateFrames = 7
+                                                                  else
+                                                                    if sStateFrames = "tau1" then
+                                                                      iStateFrames = 12
+                                                                    else
+                                                                      if sStateFrames = "pun1" then
+                                                                        iStateFrames = 3
+                                                                      else
+                                                                        if sStateFrames = "pun2" then
+                                                                          iStateFrames = 7
+                                                                        else
+                                                                          if sStateFrames = "pun3" then
+                                                                            iStateFrames = 8
+                                                                          else
+                                                                            if sStateFrames = "jubg" then
+                                                                              iStateFrames = p2maxheight
+                                                                            else
+                                                                              if sStateFrames = "jud2" then
+                                                                                iStateFrames = p2maxheight
+                                                                              else
+                                                                                if sStateFrames = "das1" then
+                                                                                  iStateFrames = 1
+                                                                                else
+                                                                                  if sStateFrames = "das2" then
+                                                                                    iStateFrames = 1
+                                                                                  else
+                                                                                    if sStateFrames = "juup" then
+                                                                                      iStateFrames = 6
+                                                                                    else
+                                                                                      if sStateFrames = "judw" then
+                                                                                        iStateFrames = 6
+                                                                                      else
+                                                                                        if sStateFrames = "jufo" then
+                                                                                          iStateFrames = 6
+                                                                                        else
+                                                                                          if sStateFrames = "jufd" then
+                                                                                            iStateFrames = 6
+                                                                                          else
+                                                                                            if sStateFrames = "juba" then
+                                                                                              iStateFrames = 6
+                                                                                            else
+                                                                                              if sStateFrames = "jubd" then
+                                                                                                iStateFrames = 6
+                                                                                              else
+                                                                                                if sStateFrames = "back" then
+                                                                                                  iStateFrames = 1
+                                                                                                else
+                                                                                                  if sStateFrames = "forw" then
+                                                                                                    iStateFrames = 1
+                                                                                                  else
+                                                                                                    if sStateFrames = "pun1" then
+                                                                                                      iStateFrames = 3
+                                                                                                    else
+                                                                                                      if sStateFrames = "pun2" then
+                                                                                                        iStateFrames = 5
+                                                                                                      else
+                                                                                                        if sStateFrames = "pun3" then
+                                                                                                          iStateFrames = 5
+                                                                                                        else
+                                                                                                          if sStateFrames = "kic1" then
+                                                                                                            iStateFrames = 4
+                                                                                                          else
+                                                                                                            if sStateFrames = "kic2" then
+                                                                                                              iStateFrames = 5
+                                                                                                            else
+                                                                                                              if sStateFrames = "kic3" then
+                                                                                                                iStateFrames = 4
+                                                                                                              else
+                                                                                                                if sStateFrames = "bloa" then
+                                                                                                                  iStateFrames = 2
+                                                                                                                else
+                                                                                                                  if sStateFrames = "qcb4" then
+                                                                                                                    iStateFrames = 9 + 5
+                                                                                                                  else
+                                                                                                                    if sStateFrames = "qcb5" then
+                                                                                                                      iStateFrames = 13 + 5
+                                                                                                                    else
+                                                                                                                      if sStateFrames = "qcb6" then
+                                                                                                                        iStateFrames = 17 + 5
+                                                                                                                      end if
+                                                                                                                    end if
+                                                                                                                  end if
+                                                                                                                end if
+                                                                                                              end if
+                                                                                                            end if
+                                                                                                          end if
+                                                                                                        end if
+                                                                                                      end if
+                                                                                                    end if
+                                                                                                  end if
+                                                                                                end if
+                                                                                              end if
+                                                                                            end if
+                                                                                          end if
+                                                                                        end if
+                                                                                      end if
+                                                                                    end if
+                                                                                  end if
+                                                                                end if
+                                                                              end if
+                                                                            end if
+                                                                          end if
+                                                                        end if
+                                                                      end if
+                                                                    end if
+                                                                  end if
+                                                                end if
+                                                              end if
+                                                            end if
+                                                          end if
+                                                        end if
+                                                      end if
+                                                    end if
+                                                  end if
+                                                end if
+                                              end if
+                                            end if
+                                          end if
+                                        end if
+                                      end if
+                                    end if
+                                  end if
+                                end if
+                              end if
+                            end if
+                          end if
+                        end if
+                      end if
+                    end if
+                  end if
+                end if
+              end if
+            end if
+          end if
+        end if
+      end if
+    end if
+  end if
+end
